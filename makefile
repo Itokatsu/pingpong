@@ -7,12 +7,13 @@ TARGET := bin/pong
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g # -Wall
+TESTOBJ := $(shell ls -1 $(BUILDDIR)/*.o | grep -v main.o)
+CFLAGS := -g -Wall -std=c++0x
 INC := -I include
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
-	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
+	@echo " $(CC) $^ -o $(TARGET)"; $(CC) $^ -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
@@ -24,10 +25,10 @@ clean:
 
 # Tests
 test:
-	$(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
+	$(CC) $(CFLAGS) $(INC) -o bin/test test/test.cpp -lm $(TESTOBJ) && ./bin/test
 
 # Run
 run:
 	@$(MAKE) && ./$(TARGET)
 
-.PHONY: clean
+.PHONY: test clean
