@@ -11,7 +11,7 @@ struct MatchSettings {
 class Game 
 {
 	public:
-		Game();
+		Game(int limit);
 		void Init();
 		void Start();
 		void Pause();

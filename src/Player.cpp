@@ -7,7 +7,12 @@ using namespace std;
 Player::Player()
 {
 	this->score = 0;
-	cout << "Creation of Player instance : " << this->score << endl;
+	cout << "Creation of Player instance" << endl;
+}
+Player::~Player()
+{
+	delete this;
+	cout << "Destruction of Player instance" << endl;
 }
 
 int Player::GetScore()

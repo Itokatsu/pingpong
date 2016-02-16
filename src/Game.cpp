@@ -5,11 +5,12 @@
 
 using namespace std;
 
-Game::Game()
+Game::Game(int limit=5)
 {
-	this->settings.scoreLimit = 3;
+	this->settings.scoreLimit = limit;
 	cout << "Creation of Game instance" << endl;
 }
+
 
 void Game::Init()
 {

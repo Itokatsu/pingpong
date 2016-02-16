@@ -25,7 +25,7 @@ clean:
 
 # Tests
 test:
-	$(CC) $(CFLAGS) $(INC) -o bin/test test/test.cpp -lm $(TESTOBJ) && ./bin/test
+	@$(MAKE) && $(CC) $(CFLAGS) $(INC) -o bin/test test/test.cpp -lm $(TESTOBJ) && ./bin/test
 
 # Run
 run:
