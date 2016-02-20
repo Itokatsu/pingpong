@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Match.h"
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
@@ -6,13 +6,13 @@ using namespace std;
 int main( )
 {
 	cout << "testing this shit" << endl;
-	Game g(10);
-	g.Init();
-	while (not g.isGameFinished()) {
-		g.Draw();
+	Match m(10);
+	m.Init();
+	while (not m.isMatchFinished()) {
+		m.Draw();
 		int playerId = rand() % 2;
-		g.players[playerId].IncrScore();
+		m.players[playerId].IncrScore();
 	}
 	cout << "Match Ended" << endl;
-	g.Draw();
+	m.Draw();
 }

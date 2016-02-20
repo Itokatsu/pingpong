@@ -1,18 +1,17 @@
-#include "Game.h"
+#include "Match.h"
 
 //temporary includes
 #include <iostream>
-
 using namespace std;
 
-Game::Game(int limit=5)
+Match::Match(int limit=5)
 {
 	this->settings.scoreLimit = limit;
-	cout << "Creation of Game instance" << endl;
+	cout << "Creation of Match instance" << endl;
 }
 
 
-void Game::Init()
+void Match::Init()
 {
 	//create Players
 	Player p1, p2;
@@ -20,20 +19,20 @@ void Game::Init()
 	players.push_back(p2);
 }
 
-void Game::Start()
+void Match::Start()
 {
 	this->time = 0;
 }
 
 
-void Game::Draw()
+void Match::Draw()
 {
 	//temporary toString behaviour
 	cout << "Player1  " << players[0].GetScore();
 	cout << " - " << players[1].GetScore() << " Player2" << endl;
 }
 
-bool Game::isGameFinished()
+bool Match::isMatchFinished()
 {	
 	bool flag = false;
 	for (auto &p : this->players) {
