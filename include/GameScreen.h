@@ -5,8 +5,7 @@
 #include "GraphicEngine.h"
 
 /*Pure abstract class 
-  i.e. TitleScreen LoadingScreen MatchScreen PostMatchScreen ...
-  Inherit with Singleton (I guess?)*/
+  i.e. TitleScreen LoadingScreen MatchScreen PostMatchScreen ... */
 
 class GameScreen
 {

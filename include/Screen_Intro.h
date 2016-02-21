@@ -2,6 +2,7 @@
 #define DEF_MATCH
 
 #include "GameScreen.h"
+#include "SDL.h"
 
 class Screen_Intro : public GameScreen
 {

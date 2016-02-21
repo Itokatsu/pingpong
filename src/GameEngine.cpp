@@ -4,9 +4,12 @@
 
 int GameEngine::Init()
 {
+	running = true;
+	//start intro
 	screens.push_back(Screen_Intro::Instance());
 	screens.back()->Init();
-	running = true;
+
+	//init graphic engine
 	GraphicEngine gfx;
 	return gfx.Init();
 }
@@ -18,6 +21,7 @@ void GameEngine::Cleanup()
 		screens.back()->Cleanup();
 		screens.pop_back();
 	}
+	//clean graphic engine
 	gfx.Cleanup();
 }
 
@@ -36,10 +40,12 @@ void GameEngine::ChangeScreen(GameScreen* screen)
 
 void GameEngine::PushScreen(GameScreen* screen)
 {
+	//pause current screen
 	if (!screen->allowBG()) {
 		screens.back()->Pause();
 	}
 
+	//start new top screen
 	screens.push_back(screen);
 	screens.back()->Init();
 }
@@ -57,11 +63,13 @@ void GameEngine::PopScreen()
 		screens.back()->Unpause();
 	}
 
+	//no screen > exit game
 	if (screens.empty()) {
-		running = false;
+		this->Quit();
 	}
 }
 
+//let current screen handle events, update and draw
 void GameEngine::HandleEvents()
 {
 	screens.back()->HandleEvents(this);
@@ -75,6 +83,11 @@ void GameEngine::Update()
 void GameEngine::Draw()
 {
 	screens.back()->Draw(this, &gfx);
+}
+
+void GameEngine::Quit()
+{
+	running = false;
 }
 
 bool GameEngine::isRunning()

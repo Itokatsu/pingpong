@@ -21,6 +21,7 @@ class GameEngine
 		void Update();
 		void Draw();
 
+		void Quit();
 		bool isRunning();
 
 	private:
