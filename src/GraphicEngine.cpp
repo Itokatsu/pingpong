@@ -36,10 +36,10 @@ int GraphicEngine::Init()
 
 			//creating renderer (texture usage)
 			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
-            if( renderer == NULL ) {
-                printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
-                returnValue = -3;
-            }
+			if( renderer == NULL ) {
+				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+				returnValue = -3;
+			}
 		}
 	}
 	return returnValue;
@@ -49,8 +49,8 @@ void GraphicEngine::Cleanup()
 {
 	if ( initialized ) {
 
-	    SDL_FreeSurface(screenSurface);
-	    screenSurface = NULL;
+		SDL_FreeSurface(screenSurface);
+		screenSurface = NULL;
 
 		SDL_DestroyRenderer( renderer );
 		renderer = NULL;
