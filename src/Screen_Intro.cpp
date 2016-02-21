@@ -39,9 +39,9 @@ void Screen_Intro::Update(GameEngine* game)
 	game->PopScreen();
 }
 
-void Screen_Intro::Draw(GameEngine* game)
+void Screen_Intro::Draw(GameEngine* game, GraphicEngine* gfx)
 {
-	std::cout << "Intro : Type something to quit" << std::endl;
+	
 }
 
 Screen_Intro* Screen_Intro::Instance()

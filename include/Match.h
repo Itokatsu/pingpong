@@ -14,10 +14,7 @@ class Match
 		Match(int limit);
 		void Init();
 		void Start();
-		void Pause();
-		void Unpause();
 		void Draw();
-		void DrawOverlay();
 		//bool isGameFinished(int& player);
 		bool isMatchFinished();
 		std::vector<Player> players;

@@ -14,7 +14,7 @@ class Screen_Intro : public GameScreen
 
 		void HandleEvents(GameEngine* game);
 		void Update(GameEngine* game);
-		void Draw(GameEngine* game);
+		void Draw(GameEngine* game, GraphicEngine* gfx);
 
 		static Screen_Intro* Instance();
 

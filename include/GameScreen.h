@@ -2,6 +2,7 @@
 #define DEF_GAMESCREEN
 
 #include "GameEngine.h"
+#include "GraphicEngine.h"
 
 /*Pure abstract class 
   i.e. TitleScreen LoadingScreen MatchScreen PostMatchScreen ...
@@ -26,7 +27,7 @@ class GameScreen
 		/*  Goes to next frame */
 		virtual void Update(GameEngine* game) = 0;
 		/* Draw the screen */
-		virtual void Draw(GameEngine* game) = 0;
+		virtual	void Draw(GameEngine* game, GraphicEngine* gfx) = 0;
 
 		bool isPaused();
 		bool allowBG();

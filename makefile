@@ -8,16 +8,17 @@ SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTOBJ := $(shell ls -1 $(BUILDDIR)/*.o | grep -v main.o)
-CFLAGS := -g -Wall -std=c++0x $(shell pkg-config --cflags --libs sdl2)
+CFLAGS := -g -Wall -std=c++0x 
+LIB := $(shell pkg-config --cflags --libs sdl2)
 INC := -I include
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
-	@echo " $(CC) $^ -o $(TARGET)"; $(CC) $^ -o $(TARGET) $(SDL)
+	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
-	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@echo " $(CC) $(CFLAGS) $(INC) $(LIB) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) $(LIB) -c -o $@ $<
 
 
 clean:

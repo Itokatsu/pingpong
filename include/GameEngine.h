@@ -2,6 +2,7 @@
 #define DEF_GAMEENGINE
 
 #include <vector>
+#include "GraphicEngine.h"
 
 class GameScreen;
 
@@ -9,7 +10,7 @@ class GameEngine
 {
 	public:
 		/*Load SDL etc..*/
-		void Init();
+		int Init();
 		void Cleanup();
 
 		void ChangeScreen(GameScreen* screen);
@@ -26,6 +27,7 @@ class GameEngine
 		//stack of Screen
 		std::vector<GameScreen*> screens;
 		bool running;
+		GraphicEngine gfx;
 
 };
 

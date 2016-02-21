@@ -5,6 +5,7 @@
 
 int main( int argc, char* args[] )
 {
+
 	GameEngine game;
 	game.Init();
 	while ( game.isRunning() ) {
