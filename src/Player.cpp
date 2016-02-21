@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Match.h"
 
 //temporary includes
 #include <iostream>
@@ -8,10 +8,6 @@ Player::Player()
 {
 	this->score = 0;
 	cout << "Creation of Player instance" << endl;
-}
-Player::~Player()
-{
-	cout << "Destruction of Player instance" << endl;
 }
 
 int Player::GetScore()

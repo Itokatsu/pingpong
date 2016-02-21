@@ -1,8 +1,18 @@
+//Using SDL and standard IO
 #include <iostream>
-using namespace std;
+#include <unistd.h>
+#include "GameEngine.h"
 
-int main( )
+
+int main( int argc, char* args[] )
 {
-	cout << "Hello World! " << endl;
-	return 0;
+	GameEngine game;
+	game.Init();
+	while ( game.isRunning() ) {
+		game.HandleEvents();
+		game.Update();
+	}
+
+	game.Cleanup();
+
 }

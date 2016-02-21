@@ -1,5 +1,5 @@
-#ifndef DEF_GAME
-#define DEF_GAME
+#ifndef DEF_MATCH
+#define DEF_MATCH
 
 #include "Player.h"
 #include <vector>
@@ -8,10 +8,10 @@ struct MatchSettings {
 	int scoreLimit;
 };
 
-class Game 
+class Match
 {
 	public:
-		Game(int limit);
+		Match(int limit);
 		void Init();
 		void Start();
 		void Pause();
@@ -19,9 +19,8 @@ class Game
 		void Draw();
 		void DrawOverlay();
 		//bool isGameFinished(int& player);
-		bool isGameFinished();
+		bool isMatchFinished();
 		std::vector<Player> players;
-
 
 	private:
 		//Field field;
