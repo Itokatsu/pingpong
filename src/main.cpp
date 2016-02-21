@@ -1,6 +1,5 @@
 //Using SDL and standard IO
 #include <iostream>
-#include <unistd.h>
 #include "GameEngine.h"
 
 

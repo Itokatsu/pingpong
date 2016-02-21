@@ -8,7 +8,7 @@ int main( )
 	cout << "testing this shit" << endl;
 	Match m(10);
 	m.Init();
-	while (not m.isMatchFinished()) {
+	while (!m.isMatchFinished()) {
 		m.Draw();
 		int playerId = rand() % 2;
 		m.players[playerId].IncrScore();

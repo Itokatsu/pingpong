@@ -5,7 +5,6 @@ class Player
 {
 	public:
 		Player();
-		~Player();
 		void Draw();
 		int GetScore();
 		//Return new score value

@@ -72,14 +72,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameEngine.cpp" />
+    <ClCompile Include="src\GameScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Match.cpp" />
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="test\test.cpp" />
+    <ClCompile Include="src\Screen_Intro.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameEngine.h" />
+    <ClInclude Include="include\GameScreen.h" />
+    <ClInclude Include="include\Match.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Screen_Intro.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
