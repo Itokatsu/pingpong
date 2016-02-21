@@ -11,7 +11,6 @@ Player::Player()
 }
 Player::~Player()
 {
-	delete this;
 	cout << "Destruction of Player instance" << endl;
 }
 
