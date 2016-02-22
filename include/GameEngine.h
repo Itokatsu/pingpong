@@ -5,6 +5,7 @@
 #include "GraphicEngine.h"
 
 class GameScreen;
+class DrawEngine;
 
 class GameEngine
 {
@@ -24,12 +25,19 @@ class GameEngine
 		void Quit();
 		bool isRunning();
 
+		GraphicEngine* GetGraphicEngine();
+		DrawEngine* GetDrawEngine();
+
 	private:
 		//stack of Screen
 		std::vector<GameScreen*> screens;
 		bool running;
 		GraphicEngine* gfx;
+		DrawEngine* drawer;
 
 };
+
+#include "DrawEngine.h"
+#include "GameScreen.h"
 
 #endif

@@ -9,7 +9,7 @@ class GraphicEngine {
 		GraphicEngine();
 		int Init();
 		void Cleanup();
-		SDL_Renderer* getRenderer();
+		SDL_Renderer* GetRenderer();
 		const int SCREEN_WIDTH = 640;
 		const int SCREEN_HEIGHT = 480;
 

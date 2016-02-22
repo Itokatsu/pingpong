@@ -1,10 +1,12 @@
 #include "GameEngine.h"
+#include "DrawEngine.h"
 #include "GameScreen.h"
 #include "Screen_Test.h"
 //#include "Screen_Intro.h"
 
 int GameEngine::Init()
 {
+	int returnValue = 0;
 	running = true;
 	//start intro
 	//screens.push_back(Screen_Intro::Instance());
@@ -14,7 +16,15 @@ int GameEngine::Init()
 
 	//init graphic engine
 	gfx = new GraphicEngine();
-	return gfx->Init();
+	if (gfx->Init() < 0) {
+		returnValue = -1;
+	}
+	else {
+		//init draw engine
+		drawer = new DrawEngine();
+		drawer->Init(gfx); //TODO : handle init errors
+	}
+	return returnValue;
 }
 
 void GameEngine::Cleanup()
@@ -24,8 +34,16 @@ void GameEngine::Cleanup()
 		screens.back()->Cleanup();
 		screens.pop_back();
 	}
+	//clean draw engine
+	drawer->Cleanup();
+	delete drawer;
+	drawer = NULL;
+
 	//clean graphic engine
 	gfx->Cleanup();
+	delete gfx;
+	gfx = NULL;
+
 }
 
 void GameEngine::ChangeScreen(GameScreen* screen)
@@ -85,7 +103,7 @@ void GameEngine::Update()
 
 void GameEngine::Draw()
 {
-	screens.back()->Draw(this, gfx);
+	screens.back()->Draw(this);
 }
 
 void GameEngine::Quit()
@@ -96,4 +114,14 @@ void GameEngine::Quit()
 bool GameEngine::isRunning()
 {
 	return running;
+}
+
+GraphicEngine* GameEngine::GetGraphicEngine()
+{
+	return gfx;
+}
+
+DrawEngine* GameEngine::GetDrawEngine()
+{
+	return drawer;
 }

@@ -2,7 +2,6 @@
 #define DEF_SCREEN_INTRO
 
 #include "GameScreen.h"
-#include "SDL.h"
 
 class Screen_Intro : public GameScreen
 {
@@ -15,7 +14,7 @@ class Screen_Intro : public GameScreen
 
 		void HandleEvents(GameEngine* game);
 		void Update(GameEngine* game);
-		void Draw(GameEngine* game, GraphicEngine* gfx);
+		void Draw(GameEngine* game);
 
 		static Screen_Intro* Instance();
 

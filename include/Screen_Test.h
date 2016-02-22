@@ -2,7 +2,6 @@
 #define DEF_SCREEN_TEST
 
 #include "GameScreen.h"
-#include "SDL.h"
 #include "Paddle.h"
 
 class Screen_Test : public GameScreen
@@ -16,7 +15,7 @@ class Screen_Test : public GameScreen
 
 		void HandleEvents(GameEngine* game);
 		void Update(GameEngine* game);
-		void Draw(GameEngine* game, GraphicEngine* gfx);
+		void Draw(GameEngine* game);
 
 		static Screen_Test* Instance();
 
@@ -24,7 +23,8 @@ class Screen_Test : public GameScreen
 		Screen_Test();
 
 	private:
-		Paddle paddle;
+		Paddle paddle1;
+		Paddle paddle2;
 		int direction;
 		static Screen_Test myTest;
 
