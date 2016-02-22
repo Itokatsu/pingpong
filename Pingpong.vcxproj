@@ -77,16 +77,20 @@
     <ClCompile Include="src\GraphicEngine.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Match.cpp" />
+    <ClCompile Include="src\Paddle.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Screen_Intro.cpp" />
+    <ClCompile Include="src\Screen_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameEngine.h" />
     <ClInclude Include="include\GameScreen.h" />
     <ClInclude Include="include\GraphicEngine.h" />
     <ClInclude Include="include\Match.h" />
+    <ClInclude Include="include\Paddle.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Screen_Intro.h" />
+    <ClInclude Include="include\Screen_Test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

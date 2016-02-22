@@ -16,4 +16,5 @@ int main( int argc, char* args[] )
 
 	game.Cleanup();
 
+	return 0;
 }
