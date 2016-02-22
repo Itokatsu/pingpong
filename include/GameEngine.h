@@ -28,7 +28,7 @@ class GameEngine
 		//stack of Screen
 		std::vector<GameScreen*> screens;
 		bool running;
-		GraphicEngine gfx;
+		GraphicEngine* gfx;
 
 };
 

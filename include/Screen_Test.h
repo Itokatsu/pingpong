@@ -1,10 +1,11 @@
-#ifndef DEF_SCREEN_INTRO
-#define DEF_SCREEN_INTRO
+#ifndef DEF_SCREEN_TEST
+#define DEF_SCREEN_TEST
 
 #include "GameScreen.h"
 #include "SDL.h"
+#include "Paddle.h"
 
-class Screen_Intro : public GameScreen
+class Screen_Test : public GameScreen
 {
 	public:
 		void Init();
@@ -17,13 +18,15 @@ class Screen_Intro : public GameScreen
 		void Update(GameEngine* game);
 		void Draw(GameEngine* game, GraphicEngine* gfx);
 
-		static Screen_Intro* Instance();
+		static Screen_Test* Instance();
 
 	protected:
-		Screen_Intro();
+		Screen_Test();
 
 	private:
-		static Screen_Intro myIntro;
+		Paddle paddle;
+		int direction;
+		static Screen_Test myTest;
 
 };
 
