@@ -74,6 +74,7 @@
   <ItemGroup>
     <ClCompile Include="src\GameEngine.cpp" />
     <ClCompile Include="src\GameScreen.cpp" />
+    <ClCompile Include="src\GraphicEngine.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Match.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -82,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="include\GameEngine.h" />
     <ClInclude Include="include\GameScreen.h" />
+    <ClInclude Include="include\GraphicEngine.h" />
     <ClInclude Include="include\Match.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Screen_Intro.h" />
