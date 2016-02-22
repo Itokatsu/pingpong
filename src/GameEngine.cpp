@@ -1,17 +1,20 @@
 #include "GameEngine.h"
 #include "GameScreen.h"
-#include "Screen_Intro.h"
+#include "Screen_Test.h"
+//#include "Screen_Intro.h"
 
 int GameEngine::Init()
 {
 	running = true;
 	//start intro
-	screens.push_back(Screen_Intro::Instance());
+	//screens.push_back(Screen_Intro::Instance());
+	//start test
+	screens.push_back(Screen_Test::Instance());
 	screens.back()->Init();
 
 	//init graphic engine
-	GraphicEngine gfx;
-	return gfx.Init();
+	gfx = new GraphicEngine();
+	return gfx->Init();
 }
 
 void GameEngine::Cleanup()
@@ -22,7 +25,7 @@ void GameEngine::Cleanup()
 		screens.pop_back();
 	}
 	//clean graphic engine
-	gfx.Cleanup();
+	gfx->Cleanup();
 }
 
 void GameEngine::ChangeScreen(GameScreen* screen)
@@ -82,7 +85,7 @@ void GameEngine::Update()
 
 void GameEngine::Draw()
 {
-	screens.back()->Draw(this, &gfx);
+	screens.back()->Draw(this, gfx);
 }
 
 void GameEngine::Quit()

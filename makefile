@@ -9,7 +9,7 @@ SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTOBJ := $(shell ls -1 $(BUILDDIR)/*.o | grep -v main.o)
 CFLAGS := -g -Wall -std=c++0x 
-LIB := $(shell pkg-config --cflags --libs sdl2)
+LIB := $(shell pkg-config --cflags --libs sdl2 SDL2_image)
 INC := -I include
 
 $(TARGET): $(OBJECTS)

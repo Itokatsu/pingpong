@@ -32,9 +32,9 @@ class GameScreen
 		bool allowBG();
 
 	private:
-		bool paused;
+		bool paused = false;
 		//allowing background screen to update
-		bool allowRunningBG;
+		bool allowRunningBG = false;
 };
 
 #endif

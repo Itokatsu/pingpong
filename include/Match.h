@@ -17,11 +17,11 @@ class Match
 		void Draw();
 		//bool isGameFinished(int& player);
 		bool isMatchFinished();
-		std::vector<Player> players;
-
+		
 	private:
 		//Field field;
 		MatchSettings settings;
+		std::vector<Player> players;
 		int time;
 		//Ball ball;
 
