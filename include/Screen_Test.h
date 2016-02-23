@@ -4,6 +4,7 @@
 #include "GameScreen.h"
 #include "Paddle.h"
 #include <time.h>
+#include "TimerSDL.h"
 
 class Screen_Test : public GameScreen
 {
@@ -18,6 +19,7 @@ class Screen_Test : public GameScreen
 		void Update(GameEngine* game);
 		void Draw(GameEngine* game);
 
+		//Singleton
 		static Screen_Test* Instance();
 
 	protected:
@@ -27,7 +29,12 @@ class Screen_Test : public GameScreen
 		Paddle paddle1;
 		Paddle paddle2;
 		int direction;
-		clock_t t;
+		clock_t timerStart;
+		clock_t runTime;
+		TimerSDL timah;
+		bool once;
+
+		//Singleton
 		static Screen_Test myTest;
 
 };
