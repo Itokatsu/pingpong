@@ -1,25 +1,20 @@
 #ifndef DEF_BALL
 #define DEF_BALL
 
+#include "IMovable.h"
 #include "SDL.h"
 
-class Ball
+class Ball : public IMovable
 {
 	public:
 		Ball();
 		Ball(int x, int y);
 
-		SDL_Point GetPos();
-		SDL_Point GetSize();
-		SDL_Point GetVelocity();
+		int GetRadius();
 
-		void SetPos(SDL_Point pos);
-		void SetSize(int radius);
-		void SetVelocity(SDL_Point velo);
+		void SetRadius(int rad);
 
 	private:
-		SDL_Point position;
-		SDL_Point velocity;
 		int radius;
 
 };

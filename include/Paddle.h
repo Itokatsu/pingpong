@@ -2,8 +2,9 @@
 #define DEF_PADDLE
 
 #include "SDL.h"
+#include "IMovable.h"
 
-class Paddle
+class Paddle : public IMovable
 {
 	public:
 		Paddle();
@@ -11,17 +12,11 @@ class Paddle
 
 		void PrintCoords();
 
-		SDL_Point GetPos();
 		SDL_Point GetSize();
-		SDL_Point GetVelocity();
 
-		void SetPos(SDL_Point pos);
 		void SetSize(SDL_Point size);
-		void SetVelocity(SDL_Point velo);
 
 	private:
-		SDL_Point position;
-		SDL_Point velocity;
 		SDL_Point size;
 
 };

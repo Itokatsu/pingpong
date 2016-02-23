@@ -72,6 +72,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\DrawEngine.cpp" />
     <ClCompile Include="src\GameEngine.cpp" />
     <ClCompile Include="src\GameScreen.cpp" />
     <ClCompile Include="src\GraphicEngine.cpp" />
@@ -81,11 +83,15 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Screen_Intro.cpp" />
     <ClCompile Include="src\Screen_Test.cpp" />
+    <ClCompile Include="src\IMovable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Ball.h" />
+    <ClInclude Include="include\DrawEngine.h" />
     <ClInclude Include="include\GameEngine.h" />
     <ClInclude Include="include\GameScreen.h" />
     <ClInclude Include="include\GraphicEngine.h" />
+    <ClInclude Include="include\IMovable.h" />
     <ClInclude Include="include\Match.h" />
     <ClInclude Include="include\Paddle.h" />
     <ClInclude Include="include\Player.h" />

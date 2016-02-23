@@ -1,5 +1,6 @@
 #include "Screen_Test.h"
 #include <iostream>
+#include <time.h>
 #include "SDL.h"
 
 Screen_Test Screen_Test::myTest;
@@ -18,6 +19,7 @@ void Screen_Test::Init()
 	paddle1.SetVelocity({2, 0});
 	paddle2.SetVelocity({-1, 0});
 	paddle2.SetSize({120, 10});
+	t = clock();
 }
 
 void Screen_Test::Cleanup()
@@ -57,13 +59,28 @@ void Screen_Test::HandleEvents(GameEngine* game)
 
 void Screen_Test::Update(GameEngine* game)
 {
+	t = clock()-t;
+	float dTime = ((float)t) / CLOCKS_PER_SEC;
+	t = clock();
+
 	if (paddle1.GetPos().x + paddle1.GetSize().x + paddle1.GetVelocity().x <= 640 &&
 		paddle1.GetPos().x + paddle1.GetVelocity().x >= 0) {
-		SDL_Point pos = {paddle1.GetPos().x + paddle1.GetVelocity().x, paddle1.GetPos().y};
-		paddle1.SetPos( pos );
+		//SDL_Point pos = {paddle1.GetPos().x + paddle1.GetVelocity().x, paddle1.GetPos().y};
+		//paddle1.SetPos( pos );
+		paddle1.UpdatePosition(dTime);
 	}
 	else {
 		paddle1.SetVelocity( {-paddle1.GetVelocity().x ,paddle1.GetVelocity().y} );
+		
+		//Out of Bounds
+		if (paddle1.GetPos().x < 0)
+		{
+			paddle1.SetPos({ 0, paddle1.GetPos().y });
+		}
+		else if ((paddle1.GetPos().x + paddle1.GetSize().x) > 640)
+		{
+			paddle1.SetPos({ 640 - paddle1.GetSize().x, paddle1.GetPos().y });
+		}
 	}
 
 
@@ -71,9 +88,20 @@ void Screen_Test::Update(GameEngine* game)
 		paddle2.GetPos().x + paddle2.GetVelocity().x >= 0) {
 		SDL_Point pos = {paddle2.GetPos().x + paddle2.GetVelocity().x, paddle2.GetPos().y};
 		paddle2.SetPos( pos );
+		//paddle2.UpdatePosition(dTime);
 	}
 	else {
 		paddle2.SetVelocity( {-paddle2.GetVelocity().x ,paddle2.GetVelocity().y} );
+
+		////Out of Bounds
+		//if (paddle2.GetPos().x < 0)
+		//{
+		//	paddle2.SetPos({ 0, paddle2.GetPos().y });
+		//}
+		//else if ((paddle2.GetPos().x + paddle2.GetSize().x) > 640)
+		//{
+		//	paddle2.SetPos({ 640 - paddle2.GetSize().x, paddle2.GetPos().y });
+		//}
 	}	
 
 	SDL_Delay(30);
