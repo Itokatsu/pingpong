@@ -28,6 +28,8 @@ class GameEngine
 		GraphicEngine* GetGraphicEngine();
 		DrawEngine* GetDrawEngine();
 
+		const uint FPSMAX = 60;
+
 	private:
 		//stack of Screen
 		std::vector<GameScreen*> screens;

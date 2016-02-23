@@ -39,7 +39,8 @@ int GraphicEngine::Init()
 
 			//creating renderer (texture usage)
 
-			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+			//renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
 			if( renderer == NULL ) {
 				std::cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << std::endl;
 				returnValue = -1;

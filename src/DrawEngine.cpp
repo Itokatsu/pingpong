@@ -17,7 +17,9 @@ void DrawEngine::Cleanup()
 
 void DrawEngine::DrawPaddle(Paddle* pad, GameEngine* game)
 {
-	SDL_Rect padRect = {pad->GetPos().x , pad->GetPos().y, pad->GetSize().x, pad->GetSize().y };
+	SDL_Point pos = pad->GetPos().ToSDLPoint();
+	SDL_Point size = pad->GetSize();
+	SDL_Rect padRect = {pos.x , pos.y, size.x, size.y };
 	SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderFillRect( renderer, &padRect );
 }

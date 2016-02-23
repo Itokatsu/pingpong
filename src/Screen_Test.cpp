@@ -3,7 +3,23 @@
 #include <time.h>
 #include "SDL.h"
 
+
+#include <string>
+#include <stdio.h>
+
 Screen_Test Screen_Test::myTest;
+
+const std::string currentDateTime() {
+    time_t     now = time(0);
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+    // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
+    // for more information about date/time format
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+
+    return buf;
+}
 
 Screen_Test::Screen_Test()
 {
@@ -13,13 +29,17 @@ Screen_Test::Screen_Test()
 void Screen_Test::Init()
 {
 	std::cout << "Test Screen Start" << std::endl;
-	paddle1 = Paddle(400,400);
-	paddle2 = Paddle(400,50);
+	paddle1 = Paddle(50,400);
+	paddle2 = Paddle(50,50);
 	//paddle.PrintCoords();
-	paddle1.SetVelocity({2, 0});
-	paddle2.SetVelocity({-1, 0});
-	paddle2.SetSize({120, 10});
-	t = clock();
+	paddle1.SetVelocity({3, 0});
+	paddle2.SetVelocity({3, 0});
+	paddle2.SetSize({100, 20});
+	timerStart = clock();
+	runTime = 0;
+	timah.start();
+	once = false;
+	std::cout << "starting @ " << currentDateTime() << std::endl;
 }
 
 void Screen_Test::Cleanup()
@@ -59,13 +79,23 @@ void Screen_Test::HandleEvents(GameEngine* game)
 
 void Screen_Test::Update(GameEngine* game)
 {
-	t = clock()-t;
-	float dTime = ((float)t) / CLOCKS_PER_SEC;
-	t = clock();
+	//clock_t diff = clock()-timerStart;
+	Uint32 diff = timah.getTime(); //ms
+	float dTime = diff / 1000.f; //seconds
+
+	//affichage ghetto
+	runTime = runTime + diff;
+	if (runTime > 1000 && !once) {
+		once = true;
+		std::cout << "1sec passed @ " << currentDateTime() << std::endl;
+	}
+
+
+	//timerStart = clock();
+	timah.reset();
 
 	if (paddle1.GetPos().x + paddle1.GetSize().x + paddle1.GetVelocity().x <= 640 &&
 		paddle1.GetPos().x + paddle1.GetVelocity().x >= 0) {
-		//SDL_Point pos = {paddle1.GetPos().x + paddle1.GetVelocity().x, paddle1.GetPos().y};
 		//paddle1.SetPos( pos );
 		paddle1.UpdatePosition(dTime);
 	}
@@ -79,14 +109,14 @@ void Screen_Test::Update(GameEngine* game)
 		}
 		else if ((paddle1.GetPos().x + paddle1.GetSize().x) > 640)
 		{
-			paddle1.SetPos({ 640 - paddle1.GetSize().x, paddle1.GetPos().y });
+			paddle1.SetPos({ 640.f - paddle1.GetSize().x, paddle1.GetPos().y });
 		}
 	}
 
 
 	if (paddle2.GetPos().x + paddle2.GetSize().x + paddle2.GetVelocity().x <= 640 &&
 		paddle2.GetPos().x + paddle2.GetVelocity().x >= 0) {
-		SDL_Point pos = {paddle2.GetPos().x + paddle2.GetVelocity().x, paddle2.GetPos().y};
+		vec2f pos = {paddle2.GetPos().x + paddle2.GetVelocity().x, paddle2.GetPos().y};
 		paddle2.SetPos( pos );
 		//paddle2.UpdatePosition(dTime);
 	}
@@ -104,7 +134,7 @@ void Screen_Test::Update(GameEngine* game)
 		//}
 	}	
 
-	SDL_Delay(30);
+	SDL_Delay(20);
 }
 
 void Screen_Test::Draw(GameEngine* game)
@@ -112,6 +142,7 @@ void Screen_Test::Draw(GameEngine* game)
 	//set BG color
 	SDL_SetRenderDrawColor( game->GetGraphicEngine()->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
 	SDL_RenderClear( game->GetGraphicEngine()->GetRenderer() );
+
 	game->GetDrawEngine()->DrawPaddle(&paddle1, game);
 	game->GetDrawEngine()->DrawPaddle(&paddle2, game);
 

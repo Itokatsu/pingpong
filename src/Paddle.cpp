@@ -9,9 +9,9 @@ Paddle::Paddle()
 Paddle::Paddle(int posX, int posY)
 {
 	size = {100, 20};
-	position = {posX, posY};
-	velocity = {0, 0};
-	acceleration = { 0, 0 };
+	position = {float(posX), float(posY)};
+	velocity = {0.f, 0.f};
+	acceleration = {0.f, 0.f};
 	std::cout << "Paddle created" << std::endl;
 }
 
