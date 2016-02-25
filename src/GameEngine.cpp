@@ -1,6 +1,6 @@
 #include "GameEngine.h"
 #include "DrawEngine.h"
-#include "GameScreen.h"
+#include "IGameScreen.h"
 #include "Screen_Test.h"
 //#include "Screen_Intro.h"
 
@@ -46,7 +46,7 @@ void GameEngine::Cleanup()
 
 }
 
-void GameEngine::ChangeScreen(GameScreen* screen)
+void GameEngine::ChangeScreen(IGameScreen* screen)
 {
 	//quit current Screen
 	if (!screens.empty()) {
@@ -59,7 +59,7 @@ void GameEngine::ChangeScreen(GameScreen* screen)
 	screens.back()->Init();
 }
 
-void GameEngine::PushScreen(GameScreen* screen)
+void GameEngine::PushScreen(IGameScreen* screen)
 {
 	//pause current screen
 	if (!screen->allowBG()) {

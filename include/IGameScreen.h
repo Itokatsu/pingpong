@@ -9,10 +9,10 @@
 /*Pure abstract class 
   i.e. TitleScreen LoadingScreen MatchScreen PostMatchScreen ... */
 
-class GameScreen
+class IGameScreen
 {
 	public:
-		//Creation of all the GameScreen's assets
+		//Creation of all the IGameScreen's assets
 		virtual void Init() = 0;
 		//Deleting assets
 		virtual void Cleanup() = 0;

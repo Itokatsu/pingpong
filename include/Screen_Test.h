@@ -1,12 +1,12 @@
 #ifndef DEF_SCREEN_TEST
 #define DEF_SCREEN_TEST
 
-#include "GameScreen.h"
+#include "IGameScreen.h"
 #include "Paddle.h"
 #include <time.h>
 #include "TimerSDL.h"
 
-class Screen_Test : public GameScreen
+class Screen_Test : public IGameScreen
 {
 	public:
 		void Init();

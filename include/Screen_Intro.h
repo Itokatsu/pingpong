@@ -1,9 +1,9 @@
 #ifndef DEF_SCREEN_INTRO
 #define DEF_SCREEN_INTRO
 
-#include "GameScreen.h"
+#include "IGameScreen.h"
 
-class Screen_Intro : public GameScreen
+class Screen_Intro : public IGameScreen
 {
 	public:
 		void Init();

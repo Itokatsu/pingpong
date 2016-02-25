@@ -4,7 +4,7 @@
 #include <vector>
 #include "GraphicEngine.h"
 
-class GameScreen;
+class IGameScreen;
 class DrawEngine;
 
 class GameEngine
@@ -14,8 +14,8 @@ class GameEngine
 		int Init();
 		void Cleanup();
 
-		void ChangeScreen(GameScreen* screen);
-		void PushScreen(GameScreen* screen);
+		void ChangeScreen(IGameScreen* screen);
+		void PushScreen(IGameScreen* screen);
 		void PopScreen();
 
 		void HandleEvents();
@@ -32,7 +32,7 @@ class GameEngine
 
 	private:
 		//stack of Screen
-		std::vector<GameScreen*> screens;
+		std::vector<IGameScreen*> screens;
 		bool running;
 		GraphicEngine* gfx;
 		DrawEngine* drawer;
@@ -40,6 +40,6 @@ class GameEngine
 };
 
 #include "DrawEngine.h"
-#include "GameScreen.h"
+#include "IGameScreen.h"
 
 #endif
