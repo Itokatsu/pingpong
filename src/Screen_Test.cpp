@@ -28,23 +28,27 @@ Screen_Test::Screen_Test()
 
 void Screen_Test::Init()
 {
-	std::cout << "Test Screen Start" << std::endl;
+	std::cout << "[Test Screen Start]" << std::endl;
 	paddle1 = Paddle(50,400);
 	paddle2 = Paddle(50,50);
 	//paddle.PrintCoords();
 	paddle1.SetVelocity({3, 0});
 	paddle2.SetVelocity({3, 0});
 	paddle2.SetSize({100, 20});
-	timerStart = clock();
-	runTime = 0;
-	timah.start();
+	ball = Ball({50, 50});
+	ball.SetVelocity({2,2});
+
 	once = false;
+	runTime.start();
+	updateTime.start();
+	FPSTimer.start();
+	framesThisSec = 0;
 	std::cout << "starting @ " << currentDateTime() << std::endl;
 }
 
 void Screen_Test::Cleanup()
 {
-	std::cout << "Test Screen Quit" << std::endl;
+	std::cout << "[Test Screen Quit]" << std::endl;
 }
 
 void Screen_Test::Pause()
@@ -80,19 +84,23 @@ void Screen_Test::HandleEvents(GameEngine* game)
 void Screen_Test::Update(GameEngine* game)
 {
 	//clock_t diff = clock()-timerStart;
-	Uint32 diff = timah.getTime(); //ms
+	Uint32 diff = updateTime.getTime(); //ms
 	float dTime = diff / 1000.f; //seconds
 
+	//timerStart = clock();
+	updateTime.reset();
 	//affichage ghetto
-	runTime = runTime + diff;
-	if (runTime > 1000 && !once) {
+	/*if (runTime.getTime() > 1000 && !once) {
 		once = true;
 		std::cout << "1sec passed @ " << currentDateTime() << std::endl;
+	}*/
+
+	//affichage fps
+	if (FPSTimer.getTime() >= 1000) {
+		std::cout << "FPS : " << framesThisSec << std::endl;
+		FPSTimer.reset();
+		framesThisSec = 0;
 	}
-
-
-	//timerStart = clock();
-	timah.reset();
 
 	if (paddle1.GetPos().x + paddle1.GetSize().x + paddle1.GetVelocity().x <= 640 &&
 		paddle1.GetPos().x + paddle1.GetVelocity().x >= 0) {
@@ -132,9 +140,9 @@ void Screen_Test::Update(GameEngine* game)
 		//{
 		//	paddle2.SetPos({ 640 - paddle2.GetSize().x, paddle2.GetPos().y });
 		//}
-	}	
-
-	SDL_Delay(20);
+	}
+	framesThisSec++;
+	//SDL_Delay(20);
 }
 
 void Screen_Test::Draw(GameEngine* game)

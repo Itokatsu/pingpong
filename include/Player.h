@@ -1,10 +1,13 @@
 #ifndef DEF_PLAYER
 #define DEF_PLAYER
 
+#include "Vec2.h"
+#include "Paddle.h"
+
 class Player
 {
 	public:
-		Player();
+		Player(vec2f pos);
 		void Draw();
 		int GetScore();
 		//Return new score value
@@ -13,6 +16,7 @@ class Player
 	private:
 		int id;
 		int score;
+		Paddle pad;
 
 };
 

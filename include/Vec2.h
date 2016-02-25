@@ -2,7 +2,7 @@
 #define __VEC2_H__
 
 #include <cmath>
-
+#include "SDL.h"
 
 template <class T>
 class vec2 {

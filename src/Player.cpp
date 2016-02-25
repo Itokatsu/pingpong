@@ -4,9 +4,10 @@
 #include <iostream>
 using namespace std;
 
-Player::Player()
+Player::Player(vec2f pos)
 {
-	this->score = 0;
+	score = 0;
+	pad = Paddle(pos);
 	cout << "Creation of Player instance" << endl;
 }
 

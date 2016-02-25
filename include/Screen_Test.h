@@ -28,11 +28,15 @@ class Screen_Test : public GameScreen
 	private:
 		Paddle paddle1;
 		Paddle paddle2;
-		int direction;
-		clock_t timerStart;
-		clock_t runTime;
-		TimerSDL timah;
+		Ball ball;
+
+		
+		TimerSDL updateTime;
+		TimerSDL runTime;
+		TimerSDL FPSTimer;
+		int framesThisSec;
 		bool once;
+
 
 		//Singleton
 		static Screen_Test myTest;

@@ -27,6 +27,12 @@ void DrawEngine::DrawPaddle(Paddle* pad, GameEngine* game)
 
 void DrawEngine::DrawBall(Ball* ball, GameEngine* game)
 {
+	SDL_Point pos = ball->GetPos().ToSDLPoint();
+	int rad = ball->GetRadius();
+	//rectangle containing the ball
+	SDL_Rect ballRect = {pos.x - rad/2, pos.y - rad/2, rad*2, rad*2 };
+
+	//yellow degueulasse
 	SDL_SetRenderDrawColor( renderer, 0xCC, 0xFF, 0x00, 0xFF );
-	
+	SDL_RenderFillRect(renderer, &ballRect);	
 }

@@ -8,7 +8,7 @@ class Ball : public IMovable
 {
 	public:
 		Ball();
-		Ball(int x, int y);
+		Ball(vec2f pos);
 
 		int GetRadius();
 

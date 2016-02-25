@@ -1,7 +1,9 @@
 #ifndef DEF_MATCH
 #define DEF_MATCH
 
+#include "IField.h"
 #include "Player.h"
+#include "Ball.h"
 #include <vector>
 
 struct MatchSettings {
@@ -11,19 +13,18 @@ struct MatchSettings {
 class Match
 {
 	public:
-		Match(int limit);
+		//Match(int limit);
 		void Init();
 		void Start();
-		void Draw();
 		//bool isGameFinished(int& player);
 		bool isMatchFinished();
 		
 	private:
-		//Field field;
+		IField field;
 		MatchSettings settings;
 		std::vector<Player> players;
-		int time;
-		//Ball ball;
+		//int time;
+		Ball ball;
 
 };
 

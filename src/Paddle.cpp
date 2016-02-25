@@ -3,16 +3,20 @@
 
 Paddle::Paddle()
 {
-	
 }
 
-Paddle::Paddle(int posX, int posY)
+Paddle::Paddle(vec2f pos) : IMovable(pos)
 {
 	size = {100, 20};
-	position = {float(posX), float(posY)};
-	velocity = {0.f, 0.f};
-	acceleration = {0.f, 0.f};
 	std::cout << "Paddle created" << std::endl;
+}
+
+Paddle::Paddle(int x, int y) : IMovable(x, y)
+{
+	size = {100, 20};
+	// position = {float(x), float(y)};
+	// velocity = {0.f, 0.f};
+	// acceleration = {0.f, 0.f};
 }
 
 void Paddle::PrintCoords()

@@ -8,6 +8,7 @@ class Paddle : public IMovable
 {
 	public:
 		Paddle();
+		Paddle(vec2f pos);
 		Paddle(int x, int y);
 
 		void PrintCoords();

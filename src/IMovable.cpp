@@ -2,6 +2,26 @@
 #include "SDL.h"
 #include <iostream>
 
+IMovable::IMovable() 
+{
+	position = {0.f, 0.f};
+	acceleration = {0.f,0.f};
+	velocity = {0.f,0.f};
+}
+
+IMovable::IMovable(vec2f pos) {
+	position = pos;
+	acceleration = {0.f,0.f};
+	velocity = {0.f,0.f};
+}
+
+IMovable::IMovable(int x, int y) {
+	position = {(float)x, (float)y};
+	acceleration = {0.f,0.f};
+	velocity = {0.f,0.f};
+}
+
+
 vec2f IMovable::GetPos()
 {
 	return position;

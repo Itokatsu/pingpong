@@ -1,15 +1,15 @@
 #ifndef DEF_IMOVABLE
 #define DEF_IMOVABLE
 
-#include "SDL.h"
 #include "Vec2.h"
-
-/*Pure abstract class
-i.e. TitleScreen LoadingScreen MatchScreen PostMatchScreen ... */
+#include "SDL.h"
 
 class IMovable
 {
 	public:
+		IMovable();
+		IMovable(vec2f pos);
+		IMovable(int x, int y);
 
 		vec2f GetPos();
 		vec2f GetVelocity();
