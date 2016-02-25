@@ -13,11 +13,15 @@ struct MatchSettings {
 class Match
 {
 	public:
-		//Match(int limit);
-		void Init();
+		Match(int limit=5);
+		void Init(IField f);
 		void Start();
 		//bool isGameFinished(int& player);
-		bool isMatchFinished();
+		bool IsMatchFinished();
+
+		IField* GetField();
+		std::vector<Player> GetPlayers();
+		Ball* GetBall();
 		
 	private:
 		IField field;

@@ -7,13 +7,13 @@ Paddle::Paddle()
 
 Paddle::Paddle(vec2f pos) : IMovable(pos)
 {
-	size = {100, 20};
+	size = {20, 100};
 	std::cout << "Paddle created" << std::endl;
 }
 
 Paddle::Paddle(int x, int y) : IMovable(x, y)
 {
-	size = {100, 20};
+	size = {20, 100};
 }
 
 void Paddle::PrintCoords()

@@ -2,9 +2,10 @@
 #define DEF_SCREEN_TEST
 
 #include "IGameScreen.h"
-#include "Paddle.h"
-#include <time.h>
 #include "TimerSDL.h"
+#include "Match.h"
+
+#include <time.h>
 
 class Screen_Test : public IGameScreen
 {
@@ -26,17 +27,14 @@ class Screen_Test : public IGameScreen
 		Screen_Test();
 
 	private:
-		Paddle paddle1;
-		Paddle paddle2;
-		Ball ball;
+		Match m;
 
-		
+
+
 		TimerSDL updateTime;
-		TimerSDL runTime;
 		TimerSDL FPSTimer;
+		TimerSDL runTime;
 		int framesThisSec;
-		bool once;
-
 
 		//Singleton
 		static Screen_Test myTest;

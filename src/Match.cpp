@@ -4,15 +4,16 @@
 #include <iostream>
 using namespace std;
 
-// Match::Match(int limit=5)
-// {
-// 	this->settings.scoreLimit = limit;
-// 	cout << "Creation of Match instance" << endl;
-// }
-
-
-void Match::Init()
+Match::Match(int limit)
 {
+	this->settings.scoreLimit = limit;
+	cout << "Creation of Match instance" << endl;
+}
+
+
+void Match::Init(IField f)
+{
+	field = f;
 	for (auto &pos : field.GetPlayersInitPos()){
 		//create and push_back
 		Player p = Player(pos);
@@ -28,16 +29,7 @@ void Match::Start()
 	//this->time = 0;
 }
 
-
-
-// void Match::Draw()
-// {
-// 	//temporary toString behaviour
-// 	cout << "Player1  " << players[0].GetScore();
-// 	cout << " - " << players[1].GetScore() << " Player2" << endl;
-// }
-
-bool Match::isMatchFinished()
+bool Match::IsMatchFinished()
 {	
 	bool flag = false;
 	for (auto &p : this->players) {
@@ -47,4 +39,19 @@ bool Match::isMatchFinished()
 		}
 	}
 	return flag;
+}
+
+IField* Match::GetField()
+{
+	return &field;
+}
+
+std::vector<Player> Match::GetPlayers()
+{
+	return players;
+}
+
+Ball* Match::GetBall()
+{
+	return &ball;
 }

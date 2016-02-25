@@ -16,8 +16,13 @@ class IField
 	protected:
 		int width;
 		int height;
+		int ballSize;
+		vec2f paddleSize;
+		
 		std::vector<vec2f> playersInitPos;
 		vec2f ballInitPos;
+
+
 		//hitboxes
 		//std::vector<CollisionBox> collisionBoxes;
 

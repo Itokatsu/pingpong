@@ -24,7 +24,7 @@
     <ClCompile Include="src\GameEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameScreen.cpp">
+    <ClCompile Include="src\IGameScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Match.cpp">
@@ -59,7 +59,7 @@
     <ClInclude Include="include\GameEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameScreen.h">
+    <ClInclude Include="include\IGameScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Match.h">

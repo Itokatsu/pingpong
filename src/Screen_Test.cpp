@@ -2,7 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include "SDL.h"
-
+#include "Field_Basic.h"
 
 #include <string>
 #include <stdio.h>
@@ -29,16 +29,8 @@ Screen_Test::Screen_Test()
 void Screen_Test::Init()
 {
 	std::cout << "[Test Screen Start]" << std::endl;
-	paddle1 = Paddle(50,400);
-	paddle2 = Paddle(50,50);
-	//paddle.PrintCoords();
-	paddle1.SetVelocity({3, 0});
-	paddle2.SetVelocity({3, 0});
-	paddle2.SetSize({100, 20});
-	ball = Ball({50, 50});
-	ball.SetVelocity({2,2});
+	m.Init(Field_Basic());
 
-	once = false;
 	runTime.start();
 	updateTime.start();
 	FPSTimer.start();
@@ -84,8 +76,8 @@ void Screen_Test::HandleEvents(GameEngine* game)
 void Screen_Test::Update(GameEngine* game)
 {
 	//clock_t diff = clock()-timerStart;
-	Uint32 diff = updateTime.getTime(); //ms
-	float dTime = diff / 1000.f; //seconds
+	//Uint32 diff = updateTime.getTime(); //ms
+	//float dTime = diff / 1000.f; //seconds
 
 	//timerStart = clock();
 	updateTime.reset();
@@ -102,45 +94,7 @@ void Screen_Test::Update(GameEngine* game)
 		framesThisSec = 0;
 	}
 
-	if (paddle1.GetPos().x + paddle1.GetSize().x + paddle1.GetVelocity().x <= 640 &&
-		paddle1.GetPos().x + paddle1.GetVelocity().x >= 0) {
-		//paddle1.SetPos( pos );
-		paddle1.UpdatePosition(dTime);
-	}
-	else {
-		paddle1.SetVelocity( {-paddle1.GetVelocity().x ,paddle1.GetVelocity().y} );
-		
-		//Out of Bounds
-		if (paddle1.GetPos().x < 0)
-		{
-			paddle1.SetPos({ 0, paddle1.GetPos().y });
-		}
-		else if ((paddle1.GetPos().x + paddle1.GetSize().x) > 640)
-		{
-			paddle1.SetPos({ 640.f - paddle1.GetSize().x, paddle1.GetPos().y });
-		}
-	}
 
-
-	if (paddle2.GetPos().x + paddle2.GetSize().x + paddle2.GetVelocity().x <= 640 &&
-		paddle2.GetPos().x + paddle2.GetVelocity().x >= 0) {
-		vec2f pos = {paddle2.GetPos().x + paddle2.GetVelocity().x, paddle2.GetPos().y};
-		paddle2.SetPos( pos );
-		//paddle2.UpdatePosition(dTime);
-	}
-	else {
-		paddle2.SetVelocity( {-paddle2.GetVelocity().x ,paddle2.GetVelocity().y} );
-
-		////Out of Bounds
-		//if (paddle2.GetPos().x < 0)
-		//{
-		//	paddle2.SetPos({ 0, paddle2.GetPos().y });
-		//}
-		//else if ((paddle2.GetPos().x + paddle2.GetSize().x) > 640)
-		//{
-		//	paddle2.SetPos({ 640 - paddle2.GetSize().x, paddle2.GetPos().y });
-		//}
-	}
 	framesThisSec++;
 	//SDL_Delay(20);
 }
@@ -151,8 +105,9 @@ void Screen_Test::Draw(GameEngine* game)
 	SDL_SetRenderDrawColor( game->GetGraphicEngine()->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
 	SDL_RenderClear( game->GetGraphicEngine()->GetRenderer() );
 
-	game->GetDrawEngine()->DrawPaddle(&paddle1, game);
-	game->GetDrawEngine()->DrawPaddle(&paddle2, game);
+	//game->GetDrawEngine()->DrawPaddle(&paddle1, game);
+	//game->GetDrawEngine()->DrawPaddle(&paddle2, game);
+	game->GetDrawEngine()->DrawMatch(&m, game);
 
 	//update
 	SDL_RenderPresent( game->GetGraphicEngine()->GetRenderer() );

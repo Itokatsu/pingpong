@@ -11,13 +11,18 @@ Player::Player(vec2f pos)
 	cout << "Creation of Player instance" << endl;
 }
 
+Paddle* Player::GetPaddle()
+{
+	return &pad;
+}
+
 int Player::GetScore()
 {
-	return this->score;
+	return score;
 }
 
 int Player::IncrScore(int d)
 {
-	this->score += d;
+	score += d;
 	return score;
 }

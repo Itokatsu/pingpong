@@ -15,6 +15,26 @@ void DrawEngine::Cleanup()
 	//clean map
 }
 
+
+void DrawEngine::DrawMatch(Match* match, GameEngine* game)
+{
+	DrawField( match->GetField(), game);
+	for ( auto &player : match->GetPlayers() ) {
+		DrawPlayer( &player, game);
+	}
+	DrawBall( match->GetBall(), game);
+}
+
+void DrawEngine::DrawField(IField* field, GameEngine* game)
+{
+
+}
+
+void DrawEngine::DrawPlayer(Player* player, GameEngine* game)
+{
+	DrawPaddle(player->GetPaddle(), game);
+}
+
 void DrawEngine::DrawPaddle(Paddle* pad, GameEngine* game)
 {
 	SDL_Point pos = pad->GetPos().ToSDLPoint();

@@ -12,6 +12,7 @@ class Player
 		int GetScore();
 		//Return new score value
 		int IncrScore(int d=1);
+		Paddle* GetPaddle();
 
 	private:
 		int id;
