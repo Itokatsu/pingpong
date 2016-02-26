@@ -41,6 +41,14 @@ bool Match::IsMatchFinished()
 	return flag;
 }
 
+void Match::Update(float dT)
+{
+	for (auto &player : players) {
+		player.GetPaddle()->UpdatePosition(dT);
+	}
+	ball.UpdatePosition(dT);
+}
+
 IField* Match::GetField()
 {
 	return &field;

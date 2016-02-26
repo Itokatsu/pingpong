@@ -53,29 +53,33 @@ void IMovable::SetAcceleration(vec2f accel)
 	acceleration = accel;
 }
 
-void IMovable::UpdatePosition(float dT_sec) 
+void IMovable::UpdatePosition(float dT) 
 {
-	float dT = dT_sec * 60; // convert into 1/60th of second
-	//Update Acceleration
-	vec2f dAccel = acceleration * dT;
+	//float dT = dT_sec * 60; // convert into 1/60th of second
 
 	//Update Velocity
+	vec2f dAccel = acceleration * dT;
 	velocity = velocity + dAccel;
-	vec2f dVelocity = velocity * dT;
 
 	//Update Position
+	vec2f dVelocity = velocity * dT;
+	std::cout << "dV : " << dVelocity.length() << std::endl;
 	//position = position + dVelocity;
 
+
+	//recursive shit that kills your memory, CPU and eats little children
 	//last step
-	if ( dVelocity.length() < 1 ){
+	if ( dVelocity.length() < 1 || dT <= 1 ){
 		position += dVelocity;
+		std::cout << "DONE" << std::endl;
 		//check & handle collision here
 	}
 	else {
 		vec2f dV_norm = dVelocity.normalize();
 		position += dV_norm;
+		std::cout << "recur" << std::endl;
 		//check & handle collision here
 		//VERY BAD IDEA
-		//this->UpdatePosition(dT_sec - 1/60);
+		UpdatePosition(dT-1);
 	}
 }

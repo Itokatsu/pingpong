@@ -18,6 +18,7 @@ class Match
 		void Start();
 		//bool isGameFinished(int& player);
 		bool IsMatchFinished();
+		void Update(float dT);
 
 		IField* GetField();
 		std::vector<Player> GetPlayers();

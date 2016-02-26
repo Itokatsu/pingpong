@@ -30,6 +30,8 @@ void Screen_Test::Init()
 {
 	std::cout << "[Test Screen Start]" << std::endl;
 	m.Init(Field_Basic());
+	//m.GetPlayers()[0].GetPaddle()->SetVelocity({0,1});
+	m.GetBall()->SetVelocity({2,2});
 
 	runTime.start();
 	updateTime.start();
@@ -76,16 +78,11 @@ void Screen_Test::HandleEvents(GameEngine* game)
 void Screen_Test::Update(GameEngine* game)
 {
 	//clock_t diff = clock()-timerStart;
-	//Uint32 diff = updateTime.getTime(); //ms
-	//float dTime = diff / 1000.f; //seconds
+	Uint32 diff = updateTime.getTime(); //ms
+	updateTime.reset();
+	float dTime = diff*60 / 1000.f; // convert to 1/60th of seconds
 
 	//timerStart = clock();
-	updateTime.reset();
-	//affichage ghetto
-	/*if (runTime.getTime() > 1000 && !once) {
-		once = true;
-		std::cout << "1sec passed @ " << currentDateTime() << std::endl;
-	}*/
 
 	//affichage fps
 	if (FPSTimer.getTime() >= 1000) {
@@ -94,6 +91,7 @@ void Screen_Test::Update(GameEngine* game)
 		framesThisSec = 0;
 	}
 
+	m.Update(dTime);
 
 	framesThisSec++;
 	//SDL_Delay(20);
@@ -105,8 +103,6 @@ void Screen_Test::Draw(GameEngine* game)
 	SDL_SetRenderDrawColor( game->GetGraphicEngine()->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
 	SDL_RenderClear( game->GetGraphicEngine()->GetRenderer() );
 
-	//game->GetDrawEngine()->DrawPaddle(&paddle1, game);
-	//game->GetDrawEngine()->DrawPaddle(&paddle2, game);
 	game->GetDrawEngine()->DrawMatch(&m, game);
 
 	//update
