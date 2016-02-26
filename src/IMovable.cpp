@@ -1,6 +1,7 @@
 #include "IMovable.h"
 #include "SDL.h"
 #include <iostream>
+#include <cmath>
 
 IMovable::IMovable() 
 {
@@ -52,20 +53,28 @@ void IMovable::SetAcceleration(vec2f accel)
 	acceleration = accel;
 }
 
-void IMovable::UpdatePosition(float dT) 
+void IMovable::UpdatePosition(float dT_sec) 
 {
-	dT = dT * 60; // 1/60th of second
+	float dT = dT_sec * 60; // convert into 1/60th of second
 	//Update Acceleration
-	//SDL_Point dAccel = { acceleration.x * dT, acceleration.y * dT };
 	vec2f dAccel = acceleration * dT;
 
 	//Update Velocity
-	//velocity = { velocity.x + dAccel.x, velocity.y + dAccel.y };
-	//SDL_Point dVelocity = { velocity.x * dT, velocity.y * dT };
 	velocity = velocity + dAccel;
 	vec2f dVelocity = velocity * dT;
 
 	//Update Position
-	//position = { position.x + dVelocity.x, position.y + dVelocity.y };
-	position = position + dVelocity;
+	//position = position + dVelocity;
+
+	//last step
+	if ( dVelocity.length() < 1 ){
+		position += dVelocity;
+		//check & handle collision here
+	}
+	else {
+		vec2f dV_norm = dVelocity.normalize();
+		position += dV_norm;
+		//check & handle collision here
+		this->UpdatePosition(dT_sec - 1/60);
+	}
 }
