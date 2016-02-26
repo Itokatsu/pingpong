@@ -75,6 +75,7 @@ void IMovable::UpdatePosition(float dT_sec)
 		vec2f dV_norm = dVelocity.normalize();
 		position += dV_norm;
 		//check & handle collision here
-		this->UpdatePosition(dT_sec - 1/60);
+		//VERY BAD IDEA
+		//this->UpdatePosition(dT_sec - 1/60);
 	}
 }
