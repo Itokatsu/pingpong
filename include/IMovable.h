@@ -1,8 +1,10 @@
 #ifndef DEF_IMOVABLE
 #define DEF_IMOVABLE
 
-#include "Vec2.h"
 #include "SDL.h"
+#include "Vec2.h"
+
+#include "IField.h"
 
 class IMovable
 {
@@ -19,7 +21,7 @@ class IMovable
 		void SetVelocity(vec2f velo);
 		void SetAcceleration(vec2f accel);
 
-		void UpdatePosition(float dTime);
+		void UpdatePosition(float dTime, IField field);
 
 	protected:
 		vec2f position;

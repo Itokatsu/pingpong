@@ -30,8 +30,7 @@ void Screen_Test::Init()
 {
 	std::cout << "[Test Screen Start]" << std::endl;
 	m.Init(Field_Basic());
-	//m.GetPlayers()[0].GetPaddle()->SetVelocity({0,1});
-	m.GetBall()->SetVelocity({2,2});
+	m.GetBall()->SetVelocity({0.3,0.6});
 
 	runTime.start();
 	updateTime.start();
@@ -77,12 +76,9 @@ void Screen_Test::HandleEvents(GameEngine* game)
 
 void Screen_Test::Update(GameEngine* game)
 {
-	//clock_t diff = clock()-timerStart;
 	Uint32 diff = updateTime.getTime(); //ms
 	updateTime.reset();
 	float dTime = diff*60 / 1000.f; // convert to 1/60th of seconds
-
-	//timerStart = clock();
 
 	//affichage fps
 	if (FPSTimer.getTime() >= 1000) {
