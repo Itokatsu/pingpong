@@ -1,6 +1,8 @@
 #ifndef DEF_IFIELD
 #define DEF_IFIELD
 
+#include "IHasCollision.h"
+
 #include "Vec2.h"
 #include <vector>
 //#include "CollisionBox.h"

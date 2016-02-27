@@ -6,9 +6,7 @@ Ball::Ball() { }
 Ball::Ball(vec2f pos) : IMovable(pos)
 {
 	radius = 10;
-	// position = pos;
-	// velocity = { 0.f, 0.f };
-	// acceleration = { 0.f, 0.f };
+	UpdateCollisionBox();
 	std::cout << "Baller created" << std::endl;
 }
 

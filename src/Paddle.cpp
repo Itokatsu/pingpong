@@ -16,11 +16,6 @@ Paddle::Paddle(int x, int y) : IMovable(x, y)
 	size = {20, 100};
 }
 
-void Paddle::PrintCoords()
-{
-	std::cout << position.x << " " << position.y << " " << size.x << " " << size.y << std::endl;	
-}
-
 SDL_Point Paddle::GetSize()
 {
 	return size;
