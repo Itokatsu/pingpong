@@ -5,15 +5,16 @@ Paddle::Paddle()
 {
 }
 
-Paddle::Paddle(vec2f pos) : IMovable(pos)
+Paddle::Paddle(vec2f pos, SDL_Point size) : IMovable(pos)
 {
-	size = {20, 100};
-	std::cout << "Paddle created" << std::endl;
+	this->size = size;
+	std::cout << " + Paddle (" << size.x << 'x' << size.y << ") created @ " << pos.x << ',' << pos.y << std::endl;
 }
 
-Paddle::Paddle(int x, int y) : IMovable(x, y)
+Paddle::Paddle(int x, int y, int w, int h) : IMovable(x, y)
 {
-	size = {20, 100};
+	size = {w, h};
+	std::cout << " + Paddle (" << w << 'x' << h << ") created @ " << x << ',' << y << std::endl;
 }
 
 SDL_Point Paddle::GetSize()

@@ -8,7 +8,12 @@ Player::Player(vec2f pos)
 {
 	score = 0;
 	pad = Paddle(pos);
-	cout << "Creation of Player instance" << endl;
+}
+
+Player::Player(vec2f pos, SDL_Point padSize)
+{
+	score = 0;
+	pad = Paddle(pos, padSize);
 }
 
 Paddle* Player::GetPaddle()

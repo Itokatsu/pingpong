@@ -2,9 +2,11 @@
 #define DEF_MATCH
 
 #include "IField.h"
+#include "IHasCollision.h"
 #include "Player.h"
 #include "Ball.h"
 #include <vector>
+#include "SDL.h"
 
 struct MatchSettings {
 	int scoreLimit;
@@ -20,6 +22,8 @@ class Match
 		bool IsMatchFinished();
 		void Update(float dT);
 
+		void ChkCollision(IHasCollision* c);
+
 		IField* GetField();
 		std::vector<Player> GetPlayers();
 		Ball* GetBall();
@@ -28,7 +32,6 @@ class Match
 		IField field;
 		MatchSettings settings;
 		std::vector<Player> players;
-		//int time;
 		Ball ball;
 
 };

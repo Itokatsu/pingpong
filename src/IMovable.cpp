@@ -1,7 +1,10 @@
 #include "IMovable.h"
+
 #include "SDL.h"
+#include "Match.h"
 #include <iostream>
 #include <cmath>
+
 
 IMovable::IMovable() 
 {
@@ -53,7 +56,7 @@ void IMovable::SetAcceleration(vec2f accel)
 	acceleration = accel;
 }
 
-void IMovable::UpdatePosition(float dT, IField field) 
+void IMovable::UpdatePosition(float dT, Match* m) 
 {
 	//Update Velocity
 	vec2f dAccel = acceleration * dT;
@@ -64,12 +67,17 @@ void IMovable::UpdatePosition(float dT, IField field)
 	//last step
 	if ( dVelocity.length() < 1){
 		position += dVelocity;
+		this->UpdateCollisionBox();
 		//check & handle collision here
+		m->ChkCollision(this);
 	}
 	else {
 		float t_norm = dT / dVelocity.length();
 		position += dVelocity.normalize();
+		this->UpdateCollisionBox();
 		//check & handle collision here
-		UpdatePosition(dT-t_norm, field);
+		m->ChkCollision(this);
+
+		UpdatePosition(dT-t_norm, m);
 	}
 }

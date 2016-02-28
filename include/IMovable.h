@@ -3,11 +3,11 @@
 
 #include "SDL.h"
 #include "Vec2.h"
+#include "IHasCollision.h"
 
-#include "IField.h"
+class Match;
 
-class IMovable
-{
+class IMovable : public IHasCollision {
 	public:
 		IMovable();
 		IMovable(vec2f pos);
@@ -21,7 +21,7 @@ class IMovable
 		void SetVelocity(vec2f velo);
 		void SetAcceleration(vec2f accel);
 
-		void UpdatePosition(float dTime, IField field);
+		void UpdatePosition(float dTime, Match* m);
 
 	protected:
 		vec2f position;

@@ -30,7 +30,6 @@ void Screen_Test::Init()
 {
 	std::cout << "[Test Screen Start]" << std::endl;
 	m.Init(Field_Basic());
-	m.GetBall()->SetVelocity({1,0});
 
 	runTime.start();
 	updateTime.start();

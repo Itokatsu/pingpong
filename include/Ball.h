@@ -5,7 +5,7 @@
 #include "IHasCollision.h"
 #include "SDL.h"
 
-class Ball : public IMovable, IHasCollision
+class Ball : public IMovable
 {
 	public:
 		Ball();

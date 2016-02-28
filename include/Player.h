@@ -8,6 +8,7 @@ class Player
 {
 	public:
 		Player(vec2f pos);
+		Player(vec2f pos, SDL_Point padSize);
 		void Draw();
 		int GetScore();
 		//Return new score value

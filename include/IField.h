@@ -12,22 +12,38 @@ class IField
 	public:
 		//place paddles & ballz
 		//void Init(Match m);
-		vec2f GetBallInitPos();
+
+		int GetWidth();
+		int GetHeight();
+
 		std::vector<vec2f> GetPlayersInitPos();
+		vec2f GetPaddleSize();
+
+		vec2f GetBallInitPos();
+		vec2f GetBallInitVelocity();
+
 
 	protected:
 		int width;
 		int height;
-		int ballSize;
+
+		std::vector<vec2f> playersInitPos;
 		vec2f paddleSize;
 		
-		std::vector<vec2f> playersInitPos;
+		int ballSize;
 		vec2f ballInitPos;
-
+		vec2f ballInitVelocity;
 
 		//hitboxes
 		//std::vector<CollisionBox> collisionBoxes;
 
+		/* IDEA
+		class Goal (inherit IHasCollision)
+		-> int worth 
+		points to add for hitting the goal à la windjammer
+		*/
+
 };
 
 #endif
+

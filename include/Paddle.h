@@ -5,22 +5,22 @@
 #include "IMovable.h"
 #include "IHasCollision.h"
 
-class Paddle : public IMovable, IHasCollision {
+class Paddle : public IMovable 
+{
 	public:
 		Paddle();
-		Paddle(vec2f pos);
-		Paddle(int x, int y);
+		Paddle( vec2f pos, SDL_Point size={20,100} );
+		Paddle( int x, int y, int w=20, int h=100 );
 
 		void UpdateCollisionBox();
 
-		void AcceptCollision(IHasCollision* c, SDL_Rect cMask);
-		void CollidesWith(IField* f, SDL_Rect cMask);
-		void CollidesWith(Paddle* p, SDL_Rect cMask);
-		void CollidesWith(Ball* b, SDL_Rect cMask);
+		void AcceptCollision( IHasCollision* c, SDL_Rect cMask );
+		void CollidesWith( IField* f, SDL_Rect cMask );
+		void CollidesWith( Paddle* p, SDL_Rect cMask );
+		void CollidesWith( Ball* b, SDL_Rect cMask );
 
 		SDL_Point GetSize();
-
-		void SetSize(SDL_Point size);
+		void SetSize( SDL_Point size );
 
 	private:
 		SDL_Point size;
