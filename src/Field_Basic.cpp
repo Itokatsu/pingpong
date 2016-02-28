@@ -6,8 +6,8 @@ Field_Basic::Field_Basic(){
 	height = 480;
 
 	//ball starting attributes
-	ballInitPos = {315, 235};
-	ballInitVelocity = {5,0.1};
+	ballInitPos = {50, 50};
+	ballInitVelocity = {6, 1.5};
 	ballSize = 5;
 
 	//players starting attributes

@@ -1,6 +1,10 @@
 #include "Ball.h"
 
 #include "IHasCollision.h"
+#include "IField.h"
+#include <iostream>
+
+
 
 void Ball::UpdateCollisionBox() {
 	collisionBox = {position.ToSDLPoint().x-radius,
@@ -18,23 +22,21 @@ void Ball::CollidesWith(IField* f, SDL_Rect cMask)
 {
 	//bounce off the edges
 	// * exact same behavior as Ball/Paddle collision
-	if (cMask.x == collisionBox.x
-				&& velocity.x < 0) {
+	if (collisionBox.x <= 0 && velocity.x < 0) {
+		velocity.x = - velocity.x;
+	}
+	//right side collides
+	else if ( collisionBox.x + collisionBox.w >= f->GetWidth()
+											&& velocity.x > 0) {
 		velocity.x = - velocity.x;
 	}
 	//top side collides
-	else if (cMask.y == collisionBox.y
-	 				 && velocity.y < 0) {
+	if (collisionBox.y <= 0 && velocity.y < 0) {
 		velocity.y = - velocity.y;
 	}
-	//right side collides
-	else if ( cMask.x + cMask.w == collisionBox.x + collisionBox.w
-								&& velocity.x > 0) {
-		velocity.x = - velocity.x;
-	}
 	//bottom side collides
-	else if ( cMask.y + cMask.h == collisionBox.y + collisionBox.h
-								&& velocity.y > 0) {
+	else if ( collisionBox.y + collisionBox.h >= f->GetHeight()
+											&& velocity.y > 0) {
 		velocity.y = - velocity.y;
 	}
 
@@ -42,7 +44,6 @@ void Ball::CollidesWith(IField* f, SDL_Rect cMask)
 
 void Ball::CollidesWith(Paddle* p, SDL_Rect cMask)
 {
-	// SDL_Rect = {x y h w}
 
 	// left side of the ball collides
 	if (cMask.x == collisionBox.x

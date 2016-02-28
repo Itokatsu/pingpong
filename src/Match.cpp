@@ -72,6 +72,16 @@ void Match::ChkCollision(IHasCollision* c)
 	SDL_Rect cBox = c->GetCollisionBox();
 	SDL_Rect cMask = {0,0,0,0};
 	//SDL_bool SDL_IntersectRect(SDL_Rect* A, SDL_Rect* B, SDL_Rect* intersect)
+
+	//out of bounds check
+	SDL_Rect fBox = {0,0,field.GetWidth(),field.GetHeight()};
+	if ( SDL_IntersectRect(&cBox, &fBox, &cMask) == SDL_FALSE) {
+		c->AcceptCollision(&field, cMask);
+	}
+	else if (SDL_RectEquals(&cMask, &cBox) == SDL_FALSE) {
+		c->AcceptCollision(&field, cMask);
+	}
+
 	for (auto &player : players) {
 		SDL_Rect padBox= player.GetPaddle()->GetCollisionBox();
 		if ( SDL_IntersectRect(&cBox, &padBox, &cMask) == SDL_TRUE ) {

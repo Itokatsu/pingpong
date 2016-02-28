@@ -7,7 +7,7 @@
 #include <vector>
 //#include "CollisionBox.h"
 
-class IField
+class IField : public IHasCollision
 {
 	public:
 		//place paddles & ballz
@@ -21,6 +21,14 @@ class IField
 
 		vec2f GetBallInitPos();
 		vec2f GetBallInitVelocity();
+
+
+		void UpdateCollisionBox();
+
+		void AcceptCollision( IHasCollision* c, SDL_Rect cMask );
+		void CollidesWith( IField* f, SDL_Rect cMask );
+		void CollidesWith( Paddle* p, SDL_Rect cMask );
+		void CollidesWith( Ball* b, SDL_Rect cMask );
 
 
 	protected:
