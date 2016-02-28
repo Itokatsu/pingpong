@@ -30,6 +30,9 @@ void Screen_Test::Init()
 {
 	std::cout << "[Test Screen Start]" << std::endl;
 	m.Init(Field_Basic());
+	for ( auto &p : m.GetPlayers() ) {
+		p.GetPaddle()->SetVelocity({0,-1});
+	}
 
 	runTime.start();
 	updateTime.start();

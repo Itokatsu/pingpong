@@ -41,9 +41,13 @@ vec2f IMovable::GetAcceleration()
 	return acceleration;
 }
 
+//=============================================
+//==  ALWAYS USE THIS FOR CHANGING POSITION ===
+//=============================================
 void IMovable::SetPos(vec2f pos)
 {
 	position = pos;
+	UpdateCollisionBox();
 }
 
 void IMovable::SetVelocity(vec2f velo)
@@ -66,15 +70,13 @@ void IMovable::UpdatePosition(float dT, Match* m)
 		
 	//last step
 	if ( dVelocity.length() < 1){
-		position += dVelocity;
-		this->UpdateCollisionBox();
+		SetPos(position + dVelocity);
 		//check & handle collision here
 		m->ChkCollision(this);
 	}
 	else {
 		float t_norm = dT / dVelocity.length();
-		position += dVelocity.normalize();
-		this->UpdateCollisionBox();
+		SetPos(position + dVelocity.normalize());
 		//check & handle collision here
 		m->ChkCollision(this);
 

@@ -17,6 +17,8 @@ void Match::Init(IField f)
 	for (auto &pos : field.GetPlayersInitPos()){
 		//create and push_back
 		Player p = Player(pos, field.GetPaddleSize().ToSDLPoint());
+		Paddle* pad = p.GetPaddle();
+		pad->SetVelocity({0,-1});
 		players.push_back(p);
 	}
 
@@ -82,6 +84,7 @@ void Match::ChkCollision(IHasCollision* c)
 		c->AcceptCollision(&field, cMask);
 	}
 
+	//paddle check
 	for (auto &player : players) {
 		SDL_Rect padBox= player.GetPaddle()->GetCollisionBox();
 		if ( SDL_IntersectRect(&cBox, &padBox, &cMask) == SDL_TRUE ) {

@@ -2,6 +2,7 @@
 
 #include "IHasCollision.h"
 #include "Ball.h"
+#include "IField.h"
 
 void Paddle::UpdateCollisionBox()
 {
@@ -18,26 +19,29 @@ void Paddle::AcceptCollision(IHasCollision* c, SDL_Rect cMask)
 
 void Paddle::CollidesWith(IField* f, SDL_Rect cMask)
 {
-	//bounce off the edges
-	// * exact same behavior as Ball/Paddle collision
-	if (cMask.x == collisionBox.x
-				&& velocity.x < 0) {
+	if (collisionBox.x <= 0 && velocity.x < 0) {
 		velocity.x = 0;
+		SetPos( {0, position.y} );
 	}
 	//top side collides
-	else if (cMask.y == collisionBox.y
-	 				 && velocity.y < 0) {
-		velocity.y = - velocity.y;
+	else if ( collisionBox.y <= 0 && velocity.y < 0) {
+		/*velocity.y = 0;
+		SetPos( {position.x, 0} );*/
+		//just for demo
+		velocity.y = -velocity.y;
 	}
 	//right side collides
-	else if ( cMask.x + cMask.w == collisionBox.x + collisionBox.w
-								&& velocity.x > 0) {
-		velocity.x = - velocity.x;
+	else if ( collisionBox.x + collisionBox.w >= f->GetWidth()
+											&& velocity.x > 0) {
+		velocity.x = 0;
+		SetPos( {f->GetWidth() - (float)size.x, position.y} );
 	}
 	//bottom side collides
-	else if ( cMask.y + cMask.h == collisionBox.y + collisionBox.h
-								&& velocity.y > 0) {
-		velocity.y = - velocity.y;
+	else if ( collisionBox.y + collisionBox.h >= f->GetHeight()
+											&& velocity.y > 0) {
+		/*velocity.y = 0;
+		SetPos( {position.x, f->GetHeight() - (float)size.y } );*/
+		velocity.y = -velocity.y;
 	}
 }
 
