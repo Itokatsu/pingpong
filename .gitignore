@@ -6,7 +6,7 @@ lib/*
 bin/*
 
 # Sublime Text Projects
-*.sublime-project
+*.sublime-*
 
 # Ignore Mac specific files
 .DS_Store
