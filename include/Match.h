@@ -16,7 +16,7 @@ class Match
 {
 	public:
 		Match(int limit=5);
-		void Init(IField f);
+		void Init(IField* f);
 		void Start();
 		//bool isGameFinished(int& player);
 		bool IsMatchFinished();
@@ -25,13 +25,13 @@ class Match
 		void ChkCollision(IHasCollision* c);
 
 		IField* GetField();
-		std::vector<Player> GetPlayers();
+		std::vector<Player*> GetPlayers();
 		Ball* GetBall();
 		
 	private:
-		IField field;
+		IField* field;
 		MatchSettings settings;
-		std::vector<Player> players;
+		std::vector<Player*> players;
 		Ball ball;
 
 };

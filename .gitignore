@@ -5,6 +5,9 @@ lib/*
 # Ignore any executables
 bin/*
 
+# Sublime Text Projects
+*.sublime-project
+
 # Ignore Mac specific files
 .DS_Store
 makefile

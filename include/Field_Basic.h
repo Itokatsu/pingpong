@@ -5,10 +5,11 @@
 
 class Field_Basic : public IField
 {
-
 	public:
 		Field_Basic();
+		~Field_Basic();
 
+		void MakeThisShitAbstract();
 };
 
 #endif

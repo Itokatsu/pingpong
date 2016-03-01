@@ -5,51 +5,51 @@
 
 #include "Vec2.h"
 #include <vector>
-//#include "CollisionBox.h"
+//#include "Goal.h"
+class Goal;
 
 class IField : public IHasCollision
 {
 	public:
 		//place paddles & ballz
 		//void Init(Match m);
+		virtual void MakeThisShitAbstract() = 0;
 
 		int GetWidth();
 		int GetHeight();
 
+		//init stuff
 		std::vector<vec2f> GetPlayersInitPos();
 		vec2f GetPaddleSize();
-
 		vec2f GetBallInitPos();
 		vec2f GetBallInitVelocity();
 
+		//std::vector<IHasCollision*> GetFieldObjects();
+		std::vector<Goal*> GetGoals();
+		void Cleanup();
 
 		void UpdateCollisionBox();
 
-		void AcceptCollision( IHasCollision* c, SDL_Rect cMask );
-		void CollidesWith( IField* f, SDL_Rect cMask );
-		void CollidesWith( Paddle* p, SDL_Rect cMask );
-		void CollidesWith( Ball* b, SDL_Rect cMask );
+		void AcceptCollision( IHasCollision* c, SDL_Rect* cMask );
+		void CollidesWith( IField* f, SDL_Rect* cMask );
+		void CollidesWith( Paddle* p, SDL_Rect* cMask );
+		void CollidesWith( Ball* b, SDL_Rect* cMask );
+		void CollidesWith( Goal* g, SDL_Rect* cMask );
 
 
 	protected:
 		int width;
 		int height;
 
+		//init stuff
 		std::vector<vec2f> playersInitPos;
 		vec2f paddleSize;
-		
 		int ballSize;
 		vec2f ballInitPos;
 		vec2f ballInitVelocity;
 
-		//hitboxes
-		//std::vector<CollisionBox> collisionBoxes;
-
-		/* IDEA
-		class Goal (inherit IHasCollision)
-		-> int worth 
-		points to add for hitting the goal à la windjammer
-		*/
+		//std::vector<IHasCollision> fieldObjs;
+		std::vector<Goal*> goals;
 
 };
 

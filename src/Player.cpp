@@ -2,23 +2,36 @@
 
 //temporary includes
 #include <iostream>
-using namespace std;
+
+Player::Player(std::string name, vec2f pos, SDL_Point padSize)
+{
+	score = 0;
+	this->name = name;
+	std::cout << " + Player \"" << this->name << "\" created " << std::endl;
+	pad = new Paddle(this, pos, padSize);
+}
 
 Player::Player(vec2f pos)
 {
 	score = 0;
-	pad = Paddle(pos);
+	std::cout << " + Player created " << std::endl;
+	pad = new Paddle(this, pos);
 }
 
-Player::Player(vec2f pos, SDL_Point padSize)
+Player::~Player()
 {
-	score = 0;
-	pad = Paddle(pos, padSize);
+	std::cout << " - Player \"" << this->name << "\" deleted" << std::endl;
 }
 
 Paddle* Player::GetPaddle()
 {
-	return &pad;
+	return pad;
+}
+
+int Player::IncrScore(int d)
+{
+	score += d;
+	return score;
 }
 
 int Player::GetScore()
@@ -26,8 +39,7 @@ int Player::GetScore()
 	return score;
 }
 
-int Player::IncrScore(int d)
+std::string Player::GetName()
 {
-	score += d;
-	return score;
+	return name;
 }

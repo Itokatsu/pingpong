@@ -30,10 +30,7 @@ int IField::GetHeight()
 	return height;
 }
 
-
-/*
-std::vector<CollisionBox> IField::GetCollisionBoxes()
+std::vector<Goal*> IField::GetGoals()
 {
-	return collisionBoxes;	
+	return goals;
 }
-*/

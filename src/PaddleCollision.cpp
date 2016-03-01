@@ -1,8 +1,8 @@
 #include "Paddle.h"
 
-#include "IHasCollision.h"
-#include "Ball.h"
 #include "IField.h"
+#include "Ball.h"
+#include "Goal.h"
 
 void Paddle::UpdateCollisionBox()
 {
@@ -12,12 +12,12 @@ void Paddle::UpdateCollisionBox()
 					size.y};
 }
 
-void Paddle::AcceptCollision(IHasCollision* c, SDL_Rect cMask)
+void Paddle::AcceptCollision(IHasCollision* c, SDL_Rect* cMask)
 {
 	c->CollidesWith(this, cMask);
 }
 
-void Paddle::CollidesWith(IField* f, SDL_Rect cMask)
+void Paddle::CollidesWith(IField* f, SDL_Rect* cMask)
 {
 	if (collisionBox.x <= 0 && velocity.x < 0) {
 		velocity.x = 0;
@@ -45,12 +45,17 @@ void Paddle::CollidesWith(IField* f, SDL_Rect cMask)
 	}
 }
 
-void Paddle::CollidesWith(Paddle* p, SDL_Rect cMask)
+void Paddle::CollidesWith(Paddle* p, SDL_Rect* cMask)
 {
 
 }
 
-void Paddle::CollidesWith(Ball* b, SDL_Rect cMask)
+void Paddle::CollidesWith(Ball* b, SDL_Rect* cMask)
 {
 	b->CollidesWith(this, cMask); //already implemented there
+}
+
+void Paddle::CollidesWith(Goal* g, SDL_Rect* cMask)
+{
+	//nothing to see here
 }
