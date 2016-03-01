@@ -7,7 +7,7 @@
 Match::Match(int limit)
 {
 	this->settings.scoreLimit = limit;
-	std::cout << "Creation of Match instance" << std::endl;
+	std::cout << " + Match created" << std::endl;
 }
 
 

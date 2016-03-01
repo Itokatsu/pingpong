@@ -45,24 +45,29 @@ void Ball::CollidesWith(IField* f, SDL_Rect* cMask)
 
 void Ball::CollidesWith(Paddle* p, SDL_Rect* cMask)
 {
-	// left side of the ball collides
+	SDL_Rect* pBox = p->GetCollisionBox();
+	// left side of the ball collides with right side of paddle
 	if (cMask->x == collisionBox.x
-				&& velocity.x < 0) {
+			&& cMask->x + cMask->w == pBox->x + pBox->w
+			&& velocity.x < 0) {
 		velocity.x = - velocity.x;
 	}
-	//right side collides
+	//right side collides with left side of paddle
 	else if ( cMask->x + cMask->w == collisionBox.x + collisionBox.w
-								&& velocity.x > 0) {
+				&& cMask->x == pBox->x
+				&& velocity.x > 0) {
 		velocity.x = - velocity.x;
 	}
-	//top side collides
+	//top side collides with bottom side of paddle
 	if (cMask->y == collisionBox.y
-	 			 && velocity.y < 0) {
+			&& cMask->y + cMask->h == pBox->y + pBox->h
+	 		&& velocity.y < 0) {
 		velocity.y = - velocity.y;
 	}
-	//bottom side collides
+	//bottom side collides with top side of paddle
 	else if ( cMask->y + cMask->h == collisionBox.y + collisionBox.h
-								&& velocity.y > 0) {
+				&& cMask->y == pBox->y
+				&& velocity.y > 0) {
 		velocity.y = - velocity.y;
 	}
 	this->SetLastP(p->GetPlayer()); //Who hit the ball
@@ -75,16 +80,16 @@ void Ball::CollidesWith(Ball* b, SDL_Rect* cMask)
 
 void Ball::CollidesWith(Goal* g, SDL_Rect* cMask)
 {
-	
 	if (p_Last != NULL) {
 		p_Last->IncrScore();
-		std::cout << p_Last->GetName() << " scored ! (" << p_Last->GetScore() << ')' << std::endl;
-	}
+		std::cout << p_Last->GetName() << " scored ! (";
+		std::cout << p_Last->GetScore() << ')' << std::endl;
 
 	//reset ball Position
 	vec2f pos = g->GetField()->GetBallInitPos();
 	this->SetPos( pos );
 	this->SetVelocity({0,0});
 	p_Last = NULL;
+	}
 
 }

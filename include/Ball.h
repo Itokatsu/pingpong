@@ -11,6 +11,7 @@ class Ball : public IMovable
 	public:
 		Ball();
 		Ball(vec2f pos);
+		~Ball();
 
 		void UpdateCollisionBox();
 		void AcceptCollision(IHasCollision* c, SDL_Rect* cMask);

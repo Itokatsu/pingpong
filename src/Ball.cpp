@@ -8,7 +8,13 @@ Ball::Ball(vec2f pos) : IMovable(pos)
 	p_Last = NULL;
 	radius = 10;
 	UpdateCollisionBox();
-	std::cout << " + Baller (" << radius << ") created @ " << pos.x << ',' << pos.y << std::endl;
+	std::cout << " + Baller (" << radius << ") created @ ";
+	std::cout << pos.x << ',' << pos.y << std::endl;
+}
+
+Ball::~Ball()
+{
+	std::cout << " - Baller (" << radius << ") deleted" << std::endl;
 }
 
 int Ball::GetRadius()
