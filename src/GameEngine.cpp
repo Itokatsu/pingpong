@@ -4,6 +4,8 @@
 #include "Screen_Intro.h"
 #include "Screen_Test.h"
 
+#include <iostream>
+
 
 int GameEngine::Init()
 {
@@ -25,6 +27,13 @@ int GameEngine::Init()
 		drawer = new DrawEngine();
 		drawer->Init(gfx); //TODO : handle init errors
 	}
+
+	//start timers
+	framesThisSec = 0;
+	runTime.start();
+	updateTime.start();
+	FPSTimer.start();
+
 	return returnValue;
 }
 
@@ -63,7 +72,7 @@ void GameEngine::ChangeScreen(IGameScreen* screen)
 void GameEngine::PushScreen(IGameScreen* screen)
 {
 	//pause current screen
-	if (!screen->allowBG()) {
+	if (!screen->RunBG()) {
 		screens.back()->Pause();
 	}
 
@@ -81,7 +90,7 @@ void GameEngine::PopScreen()
 	}
 
 	//resume previous screen
-	if (!screens.empty() && screens.back()->isPaused()) {
+	if (!screens.empty() && screens.back()->IsPaused()) {
 		screens.back()->Unpause();
 	}
 
@@ -99,12 +108,43 @@ void GameEngine::HandleEvents()
 
 void GameEngine::Update()
 {
-	screens.back()->Update(this);
+	Uint32 diff = updateTime.getTime(); //ms
+	updateTime.reset();
+	float dTime = diff*60 / 1000.f; // convert to 1/60ths of second
+
+	// FPS Display
+	if (FPSTimer.getTime() >= 1000) { //1sec passed
+		std::cout << "FPS : " << framesThisSec << std::endl;
+		FPSTimer.reset();
+		framesThisSec = 0;
+	}
+
+	unsigned int idx = screens.size()-1;
+	while ( screens.at(idx)->RunBG() && idx >= 0 ) {
+		idx--;
+	}
+	while ( idx <= screens.size()-1) {
+		screens.at(idx)->Update(this, dTime);
+		idx++;
+	}
+	framesThisSec++;
 }
 
 void GameEngine::Draw()
 {
-	screens.back()->Draw(this);
+	SDL_SetRenderDrawColor( gfx->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
+	SDL_RenderClear( gfx->GetRenderer() );
+
+	unsigned int idx = screens.size()-1;
+	while ( screens.at(idx)->DisplayBG() && idx >= 0 ) {
+		idx--;
+	}
+	while ( idx <= screens.size()-1) {
+		screens.at(idx)->Draw(this);
+		idx++;
+	}
+	//update
+	SDL_RenderPresent( gfx->GetRenderer() );
 }
 
 void GameEngine::Quit()

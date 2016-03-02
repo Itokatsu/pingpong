@@ -13,7 +13,7 @@ class Screen_Intro : public IGameScreen
 		void Unpause();
 
 		void HandleEvents(GameEngine* game);
-		void Update(GameEngine* game);
+		void Update(GameEngine* game, float dT);
 		void Draw(GameEngine* game);
 
 		static Screen_Intro* Instance();

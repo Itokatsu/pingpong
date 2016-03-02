@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "GraphicEngine.h"
+#include "TimerSDL.h"
 
 class IGameScreen;
 class DrawEngine;
@@ -28,14 +29,18 @@ class GameEngine
 		GraphicEngine* GetGraphicEngine();
 		DrawEngine* GetDrawEngine();
 
-		const unsigned int FPSMAX = 60;
-
 	private:
 		//stack of Screen
 		std::vector<IGameScreen*> screens;
 		bool running;
 		GraphicEngine* gfx;
 		DrawEngine* drawer;
+
+		//Timers and FPS counter
+		TimerSDL runTime;
+		TimerSDL FPSTimer;
+		TimerSDL updateTime;
+		int framesThisSec;
 
 };
 

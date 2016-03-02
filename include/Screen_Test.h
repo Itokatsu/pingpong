@@ -13,11 +13,8 @@ class Screen_Test : public IGameScreen
 		void Init();
 		void Cleanup();
 
-		void Pause();
-		void Unpause();
-
 		void HandleEvents(GameEngine* game);
-		void Update(GameEngine* game);
+		void Update(GameEngine* game, float dT);
 		void Draw(GameEngine* game);
 
 		//Singleton
@@ -28,11 +25,6 @@ class Screen_Test : public IGameScreen
 
 	private:
 		Match* m;
-
-		TimerSDL updateTime;
-		TimerSDL FPSTimer;
-		TimerSDL runTime;
-		int framesThisSec;
 
 		//Singleton
 		static Screen_Test myTest;

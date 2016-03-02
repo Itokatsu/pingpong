@@ -54,7 +54,7 @@ void Screen_Intro::HandleEvents(GameEngine* game)
 	}
 }
 
-void Screen_Intro::Update(GameEngine* game)
+void Screen_Intro::Update(GameEngine* game, float dT)
 {
 	SDL_Delay(100);
 }

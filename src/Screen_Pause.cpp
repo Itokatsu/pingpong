@@ -7,7 +7,7 @@ Screen_Pause Screen_Pause::myPause;
 
 Screen_Pause::Screen_Pause()
 {
-
+	displayBG = true;
 }
 
 void Screen_Pause::Init()
@@ -49,14 +49,17 @@ void Screen_Pause::HandleEvents(GameEngine* game)
 	}
 }
 
-void Screen_Pause::Update(GameEngine* game)
+void Screen_Pause::Update(GameEngine* game, float dT)
 {
 
 }
 
 void Screen_Pause::Draw(GameEngine* game)
 {
-
+	SDL_Renderer* rend = game->GetGraphicEngine()->GetRenderer();
+	SDL_SetRenderDrawColor( rend, 0x00, 0x00, 0x00, 0xB7 );
+	SDL_Rect filter = {0,0,640,480};
+	SDL_RenderFillRect(game->GetGraphicEngine()->GetRenderer(), &filter);
 }
 
 Screen_Pause* Screen_Pause::Instance()

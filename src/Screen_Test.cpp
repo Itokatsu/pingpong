@@ -1,25 +1,14 @@
 #include "Screen_Test.h"
+
 #include <iostream>
 #include <time.h>
 #include "SDL.h"
 #include "Field_Basic.h"
+#include "Screen_Pause.h"
 
-#include <string>
 #include <stdio.h>
 
 Screen_Test Screen_Test::myTest;
-
-const std::string currentDateTime() {
-    time_t     now = time(0);
-    struct tm  tstruct;
-    char       buf[80];
-    tstruct = *localtime(&now);
-    // Visit http://en.cppreference.com/w/cpp/chrono/c/strftime
-    // for more information about date/time format
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
-
-    return buf;
-}
 
 Screen_Test::Screen_Test()
 {
@@ -36,11 +25,6 @@ void Screen_Test::Init()
 		p->GetPaddle()->SetVelocity({0,-1});
 	}
 
-	runTime.start();
-	updateTime.start();
-	FPSTimer.start();
-	framesThisSec = 0;
-	std::cout << "starting @ " << currentDateTime() << std::endl;
 }
 
 void Screen_Test::Cleanup()
@@ -48,16 +32,6 @@ void Screen_Test::Cleanup()
 	delete m;
 	m = NULL;
 	std::cout << "[Test Screen Quit]" << std::endl;
-}
-
-void Screen_Test::Pause()
-{
-
-}
-
-void Screen_Test::Unpause()
-{
-
 }
 
 void Screen_Test::HandleEvents(GameEngine* game)
@@ -75,40 +49,24 @@ void Screen_Test::HandleEvents(GameEngine* game)
 				if (e.key.keysym.sym == SDLK_ESCAPE) {
 					game->Quit();
 				}
+				else if (e.key.keysym.sym == SDLK_p) 
+				{
+					this->Pause();
+					game->PushScreen(Screen_Pause::Instance());
+				}
 			}
 		}
 	}
 }
 
-void Screen_Test::Update(GameEngine* game)
+void Screen_Test::Update(GameEngine* game, float dT)
 {
-	Uint32 diff = updateTime.getTime(); //ms
-	updateTime.reset();
-	float dTime = diff*60 / 1000.f; // convert to 1/60th of seconds
-
-	//affichage fps
-	if (FPSTimer.getTime() >= 1000) {
-		std::cout << "FPS : " << framesThisSec << std::endl;
-		FPSTimer.reset();
-		framesThisSec = 0;
-	}
-
-	m->Update(dTime);
-
-	framesThisSec++;
-	//SDL_Delay(20);
+	m->Update(dT);
 }
 
 void Screen_Test::Draw(GameEngine* game)
 {
-	//set BG color
-	SDL_SetRenderDrawColor( game->GetGraphicEngine()->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
-	SDL_RenderClear( game->GetGraphicEngine()->GetRenderer() );
-
 	game->GetDrawEngine()->DrawMatch(m, game);
-
-	//update
-	SDL_RenderPresent( game->GetGraphicEngine()->GetRenderer() );
 }
 
 Screen_Test* Screen_Test::Instance()
