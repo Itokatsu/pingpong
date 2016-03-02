@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(pong)
 
+# RANDOM CMAKE OPTIONS
+SET(CMAKE_COLOR_MAKEFILE ON)
+
 # Compiler Options
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -std=c++11")
 
 # Project Tree 
 # | SOURCES DIRECTORY
@@ -11,17 +14,22 @@ set(SRC_EXT cpp) # SOURCES EXTENSION
 # | EXECUTABLE DIRECTORY
 set(EXE_NAME ${PROJECT_NAME}) #EXECUTABLE NAME
 # | HEADERS DIRECTORY
-include_directories(include)
+set(HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Get Sources files
 file(GLOB SOURCES_FILES "${SRC_DIR}/*.${SRC_EXT}")
 # specify output directories
 SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
-# Include SDL2
-include(FindPkgConfig)
-pkg_search_module(SDL2 REQUIRED sdl2)
-include_directories (${SDL2_INCLUDE_DIRS})
+# Include SDL2 Ninux Only
+#include(FindPkgConfig)
+#pkg_search_module(SDL2 REQUIRED sdl2)
+#include_directories (${SDL2_INCLUDE_DIRS})
+
+# Crossplatform FIND SDL2
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules")
+find_package(SDL2 REQUIRED)
+include_directories (${HEADER_DIR} ${SDL2_INCLUDE_DIRS})
 
 add_executable(${EXE_NAME} ${SOURCES_FILES})
 target_link_libraries(${EXE_NAME} ${SDL2_LIBRARIES})
