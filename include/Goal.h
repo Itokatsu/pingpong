@@ -10,11 +10,9 @@
 class Goal : public IHasCollision {
 
 	public:
-		Goal();
 		Goal(IField* f, SDL_Rect area, int pts=1);
 		Goal(IField* f, int x, int y, int w, int h, int pts=1);
-
-		void PrintShit();
+		~Goal();
 
 		void UpdateCollisionBox();
 

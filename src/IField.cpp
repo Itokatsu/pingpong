@@ -1,4 +1,14 @@
 #include "IField.h"
+#include "Goal.h"
+
+IField::~IField()
+{
+	for (auto &goal : goals) {
+		delete goal;
+		goal = NULL;
+	}
+	goals.clear();
+}
 
 std::vector<vec2f> IField::GetPlayersInitPos()
 {

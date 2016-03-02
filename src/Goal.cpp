@@ -1,14 +1,7 @@
 #include "Goal.h"
+
 #include <iostream>
 #include "IField.h"
-
-Goal::Goal() 
-{
-	//field = NULL;
-	area = {0,0,0,0};
-	pts = 0;
-	std::cout << "uh oh" << std::endl;
-}
 
 Goal::Goal(IField* f, SDL_Rect area, int pts)
 {
@@ -16,9 +9,7 @@ Goal::Goal(IField* f, SDL_Rect area, int pts)
 	this->pts = pts;
 	this->area = area;
 	UpdateCollisionBox();
-	//std::cout << " + Goal \"" << s << "\" (" << area.w << 'x'<< area.h << ") created @ " << area.x << ',' << area.y << std::endl;
-	//std::cout << "   * on Field (" << field.GetWidth() << 'x' << field.GetHeight() << ')' << std::endl;
-	//std::cout << "   * on Field (" << field.GetWidth() << 'x' << field.GetHeight() << ')' << std::endl;
+	std::cout << " + Goal (" << area.w << 'x'<< area.h << ") created @ " << area.x << ',' << area.y << std::endl;
 }
 
 Goal::Goal(IField* f, int x, int y, int w, int h, int pts)
@@ -28,12 +19,12 @@ Goal::Goal(IField* f, int x, int y, int w, int h, int pts)
 	SDL_Rect areaRect = {x, y, w, h};
 	area = areaRect;
 	UpdateCollisionBox();
-	//std::cout << " + Goal \"" << s << "\" (" << area.w << 'x'<< area.h << ") created @ " << area.x << ',' << area.y << std::endl;
-	//std::cout << "   * on Field (" << field.GetWidth() << 'x' << field.GetHeight() << ')' << std::endl;
+	std::cout << " + Goal (" << area.w << 'x'<< area.h << ") created @ " << area.x << ',' << area.y << std::endl;
 }
 
-void Goal::PrintShit(){
-	std::cout << "Goal \"" << str << "\" (" << field->GetWidth() << 'x' << field->GetHeight() <<')' << std::endl;
+Goal::~Goal() 
+{
+	std::cout << " - Goal @ " << area.x << ',' << area.y << " deleted" << std::endl;
 }
 
 int Goal::GetValue()

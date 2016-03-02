@@ -19,20 +19,18 @@ Field_Basic::Field_Basic()
 	playersInitPos.push_back({600, 200});
 	paddleSize = {20, 100};
 
+	std::cout << " + Field (Basic) created" << std::endl;
 	//goals 
 	Goal* g1 = new Goal(this, 0, 0, 3, height, 1);
 	Goal* g2 = new Goal(this, width-3, 0, 3, height, 1);
 	goals.push_back(g1);
 	goals.push_back(g2);
 
-	//std::cout <<'(' <<g1->GetField().GetWidth() <<'x' << g1->GetField().GetHeight() <<')' << std::endl;
-	//std::cout <<'(' <<g2->GetField().GetWidth() <<'x' << g2->GetField().GetHeight() <<')' << std::endl;
-
 }
 
 Field_Basic::~Field_Basic()
 {
-	std::cout << "Field DELETED" << std::endl;
+	std::cout << " - Field (Basic) Deleted" << std::endl;
 }
 
 void Field_Basic::MakeThisShitAbstract() {

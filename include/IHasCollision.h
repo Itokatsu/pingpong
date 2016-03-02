@@ -10,6 +10,8 @@ class Goal;
 class IHasCollision
 {
 	public:
+		virtual ~IHasCollision() {};
+
 		//cMask parameter is collision mask
 
 		//Accept : double dispatch (visitor pattern)

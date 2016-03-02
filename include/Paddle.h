@@ -10,9 +10,9 @@ class Player;
 class Paddle : public IMovable 
 {
 	public:
-		Paddle();
 		Paddle(Player* p, vec2f pos, SDL_Point size={20,100});
 		Paddle(Player* p, int x, int y, int w=20, int h=100);
+		~Paddle();
 
 		void UpdateCollisionBox();
 

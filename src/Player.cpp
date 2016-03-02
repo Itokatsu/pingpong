@@ -20,6 +20,8 @@ Player::Player(vec2f pos)
 
 Player::~Player()
 {
+	delete pad;
+	pad = NULL;
 	std::cout << " - Player \"" << this->name << "\" deleted" << std::endl;
 }
 

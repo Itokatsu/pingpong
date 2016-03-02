@@ -1,10 +1,6 @@
 #include "Paddle.h"
 #include <iostream>
 
-Paddle::Paddle()
-{
-}
-
 Paddle::Paddle(Player* p, vec2f pos, SDL_Point size) : IMovable(pos)
 {
 	player = p;
@@ -17,6 +13,11 @@ Paddle::Paddle(Player* p, int x, int y, int w, int h) : IMovable(x, y)
 	player = p;
 	size = {w, h};
 	std::cout << " + Paddle (" << w << 'x' << h << ") created @ " << x << ',' << y << std::endl;
+}
+
+Paddle::~Paddle()
+{
+	std::cout << " - Paddle @ " << position.x << ',' << position.y << "deleted" << std::endl;	
 }
 
 SDL_Point Paddle::GetSize()

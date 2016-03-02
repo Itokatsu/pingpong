@@ -14,6 +14,7 @@ class IField : public IHasCollision
 		//place paddles & ballz
 		//void Init(Match m);
 		virtual void MakeThisShitAbstract() = 0;
+		virtual ~IField();
 
 		int GetWidth();
 		int GetHeight();

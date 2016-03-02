@@ -10,6 +10,23 @@ Match::Match(int limit)
 	std::cout << " + Match created" << std::endl;
 }
 
+Match::~Match()
+{
+	delete ball;
+	ball = NULL;
+	delete field;
+	field = NULL;
+
+	for (auto &player : players) {
+		delete player;
+		player = NULL;
+	}
+	players.clear();
+
+
+	std::cout << " - Match deleted" << std::endl;
+}
+
 
 void Match::Init(IField* f)
 {
@@ -25,8 +42,8 @@ void Match::Init(IField* f)
 
 	vec2f bPos = field->GetBallInitPos();
 	vec2f bVelo = field->GetBallInitVelocity();
-	ball = Ball(bPos);
-	ball.SetVelocity(bVelo);
+	ball = new Ball(bPos);
+	ball->SetVelocity(bVelo);
 }
 
 void Match::Start()
@@ -51,7 +68,7 @@ void Match::Update(float dT)
 	for (auto &player : players) {
 		player->GetPaddle()->UpdatePosition(dT, this);
 	}
-	ball.UpdatePosition(dT, this);
+	ball->UpdatePosition(dT, this);
 }
 
 IField* Match::GetField()
@@ -66,7 +83,7 @@ std::vector<Player*> Match::GetPlayers()
 
 Ball* Match::GetBall()
 {
-	return &ball;
+	return ball;
 }
 
 //JUST A BABY CHECK
