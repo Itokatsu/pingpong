@@ -8,32 +8,35 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -std=c++11")
 
 # Project Tree 
+# | CMAKE MODULES DIRECTORY 
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 # | SOURCES DIRECTORY
-set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(SRC_EXT cpp) # SOURCES EXTENSION
-# | EXECUTABLE DIRECTORY
-set(EXE_NAME ${PROJECT_NAME}) #EXECUTABLE NAME
+set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
+set(SRC_EXT cpp)
 # | HEADERS DIRECTORY
-set(HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(HEADER_DIR ${CMAKE_SOURCE_DIR}/include)
 
 # Get Sources files
 file(GLOB SOURCES_FILES "${SRC_DIR}/*.${SRC_EXT}")
+
 # specify output directories
-SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# specity executable name
+set(EXE_NAME ${PROJECT_NAME})
 
-# Include SDL2 Ninux Only
-#include(FindPkgConfig)
-#pkg_search_module(SDL2 REQUIRED sdl2)
-#include_directories (${SDL2_INCLUDE_DIRS})
-
-# Crossplatform FIND SDL2
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules")
+# FIND SDL2 libraries
 find_package(SDL2 REQUIRED)
-include_directories (${HEADER_DIR} ${SDL2_INCLUDE_DIRS})
 
+# Include headers and libraries
+include_directories (${HEADER_DIR} ${SDL2_INCLUDE_DIR})
+
+# compile
 add_executable(${EXE_NAME} ${SOURCES_FILES})
-target_link_libraries(${EXE_NAME} ${SDL2_LIBRARIES})
+target_link_libraries(${EXE_NAME} ${SDL2_LIBRARY})
 
+# add make run target
 add_custom_target(run
     COMMAND ${EXE_NAME}
     DEPENDS ${EXE_NAME}
