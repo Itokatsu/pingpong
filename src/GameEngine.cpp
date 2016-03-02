@@ -1,17 +1,18 @@
 #include "GameEngine.h"
 #include "DrawEngine.h"
 #include "IGameScreen.h"
+#include "Screen_Intro.h"
 #include "Screen_Test.h"
-//#include "Screen_Intro.h"
+
 
 int GameEngine::Init()
 {
 	int returnValue = 0;
 	running = true;
 	//start intro
-	//screens.push_back(Screen_Intro::Instance());
+	screens.push_back(Screen_Intro::Instance());
 	//start test
-	screens.push_back(Screen_Test::Instance());
+	//screens.push_back(Screen_Test::Instance());
 	screens.back()->Init();
 
 	//init graphic engine

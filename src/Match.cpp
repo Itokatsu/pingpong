@@ -23,7 +23,6 @@ Match::~Match()
 	}
 	players.clear();
 
-
 	std::cout << " - Match deleted" << std::endl;
 }
 

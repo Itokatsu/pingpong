@@ -17,7 +17,7 @@ Paddle::Paddle(Player* p, int x, int y, int w, int h) : IMovable(x, y)
 
 Paddle::~Paddle()
 {
-	std::cout << " - Paddle @ " << position.x << ',' << position.y << "deleted" << std::endl;	
+	std::cout << " - Paddle @ " << position.x << ',' << position.y << " deleted" << std::endl;	
 }
 
 SDL_Point Paddle::GetSize()

@@ -27,7 +27,7 @@ class Screen_Test : public IGameScreen
 		Screen_Test();
 
 	private:
-		Match m;
+		Match* m;
 
 		TimerSDL updateTime;
 		TimerSDL FPSTimer;

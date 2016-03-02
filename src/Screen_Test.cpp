@@ -28,9 +28,11 @@ Screen_Test::Screen_Test()
 
 void Screen_Test::Init()
 {
+	m = new Match();
+
 	std::cout << "[Test Screen Start]" << std::endl;
-	m.Init(new Field_Basic());
-	for ( auto &p : m.GetPlayers() ) {
+	m->Init(new Field_Basic());
+	for ( auto &p : m->GetPlayers() ) {
 		p->GetPaddle()->SetVelocity({0,-1});
 	}
 
@@ -43,6 +45,8 @@ void Screen_Test::Init()
 
 void Screen_Test::Cleanup()
 {
+	delete m;
+	m = NULL;
 	std::cout << "[Test Screen Quit]" << std::endl;
 }
 
@@ -64,10 +68,10 @@ void Screen_Test::HandleEvents(GameEngine* game)
 		if( e.type == SDL_QUIT ) {
 			game->Quit();
 		}
-
 		else {
+			// Key press 
 			if( e.type == SDL_KEYDOWN ) {
-				//ESCAPE is pressed
+				// ESCAPE is pressed
 				if (e.key.keysym.sym == SDLK_ESCAPE) {
 					game->Quit();
 				}
@@ -89,7 +93,7 @@ void Screen_Test::Update(GameEngine* game)
 		framesThisSec = 0;
 	}
 
-	m.Update(dTime);
+	m->Update(dTime);
 
 	framesThisSec++;
 	//SDL_Delay(20);
@@ -101,7 +105,7 @@ void Screen_Test::Draw(GameEngine* game)
 	SDL_SetRenderDrawColor( game->GetGraphicEngine()->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
 	SDL_RenderClear( game->GetGraphicEngine()->GetRenderer() );
 
-	game->GetDrawEngine()->DrawMatch(&m, game);
+	game->GetDrawEngine()->DrawMatch(m, game);
 
 	//update
 	SDL_RenderPresent( game->GetGraphicEngine()->GetRenderer() );
