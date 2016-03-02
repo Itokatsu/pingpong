@@ -73,13 +73,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\BallCollision.cpp" />
     <ClCompile Include="src\DrawEngine.cpp" />
+    <ClCompile Include="src\Field_Basic.cpp" />
     <ClCompile Include="src\GameEngine.cpp" />
+    <ClCompile Include="src\Goal.cpp" />
+    <ClCompile Include="src\IField.cpp" />
+    <ClCompile Include="src\IFieldCollision.cpp" />
     <ClCompile Include="src\IGameScreen.cpp" />
     <ClCompile Include="src\GraphicEngine.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Match.cpp" />
     <ClCompile Include="src\Paddle.cpp" />
+    <ClCompile Include="src\PaddleCollision.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Screen_Intro.cpp" />
     <ClCompile Include="src\Screen_Test.cpp" />
@@ -88,15 +94,21 @@
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
     <ClInclude Include="include\DrawEngine.h" />
+    <ClInclude Include="include\Field_Basic.h" />
     <ClInclude Include="include\GameEngine.h" />
+    <ClInclude Include="include\Goal.h" />
+    <ClInclude Include="include\IField.h" />
     <ClInclude Include="include\IGameScreen.h" />
     <ClInclude Include="include\GraphicEngine.h" />
+    <ClInclude Include="include\IHasCollision.h" />
     <ClInclude Include="include\IMovable.h" />
     <ClInclude Include="include\Match.h" />
     <ClInclude Include="include\Paddle.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Screen_Intro.h" />
     <ClInclude Include="include\Screen_Test.h" />
+    <ClInclude Include="include\TimerSDL.h" />
+    <ClInclude Include="include\Vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
