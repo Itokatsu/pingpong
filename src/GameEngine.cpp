@@ -10,16 +10,11 @@
 int GameEngine::Init()
 {
 	int returnValue = 0;
-	running = tsrue;
-	//start intro
-	screens.push_back(Screen_Intro::Instance());
-	//start test
-	//screens.push_back(Screen_Test::Instance());
-	screens.back()->Init();
 
-	//init graphic engine
+	// init graphic engine
 	gfx = new GraphicEngine();
-	if (gfx->Init() < 0) {
+	// if init failed
+	if (gfx->Init() < 0) { 
 		returnValue = -1;
 	}
 	else {
@@ -28,29 +23,38 @@ int GameEngine::Init()
 		drawer->Init(gfx); //TODO : handle init errors
 	}
 
-	//start timers
-	framesThisSec = 0;
-	runTime.start();
-	updateTime.start();
-	FPSTimer.start();
+	// if init succeeded
+	if (returnValue == 0) {
+		// start intro
+		screens.push_back(Screen_Intro::Instance());
+		// init intro
+		screens.back()->Init();
+
+		//start timers
+		framesThisSec = 0;
+		runTime.start();
+		updateTime.start();
+		FPSTimer.start();
+		running = true;
+	}
 
 	return returnValue;
 }
 
 void GameEngine::Cleanup()
 {
-	//clear the stack
+	// clear the stack
 	while (!screens.empty()) {
 		screens.back()->Cleanup();
 		screens.pop_back();
 	}
 	screens.clear();
-	//clean draw engine
+	// clean draw engine
 	drawer->Cleanup();
 	delete drawer;
 	drawer = NULL;
 
-	//clean graphic engine
+	// clean graphic engine
 	gfx->Cleanup();
 	delete gfx;
 	gfx = NULL;
@@ -109,25 +113,33 @@ void GameEngine::HandleEvents()
 
 void GameEngine::Update()
 {
+	// get time since last update
 	Uint32 diff = updateTime.getTime(); //ms
 	updateTime.reset();
+
 	float dTime = diff*60 / 1000.f; // convert to 1/60ths of second
 
-	// FPS Display
+	// Display FPS every second
 	if (FPSTimer.getTime() >= 1000) { //1sec passed
 		std::cout << "FPS : " << framesThisSec << std::endl;
+		// Reset counter
 		FPSTimer.reset();
 		framesThisSec = 0;
 	}
 
+	// Top of the stack
 	unsigned int idx = screens.size()-1;
+	// Find highest screen in the stack not accepting screens running in the background
 	while ( screens.at(idx)->RunBG() && idx >= 0 ) {
 		idx--;
 	}
+	// Update all screens till back at the top
 	while ( idx <= screens.size()-1) {
 		screens.at(idx)->Update(this, dTime);
 		idx++;
 	}
+
+	// Add one frame to FPS counter
 	framesThisSec++;
 }
 
@@ -137,15 +149,18 @@ void GameEngine::Draw()
 	SDL_SetRenderDrawColor( gfx->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
 	SDL_RenderClear( gfx->GetRenderer() );
 
-	unsigned int idx = screens.size()-1;
+	unsigned int idx = screens.size()-1; // Top of the stack
+	// Find highest screen in the stack not accepting screens displaying in the background
 	while ( screens.at(idx)->DisplayBG() && idx >= 0 ) {
 		idx--;
 	}
+	// Display all screens till back at the top
 	while ( idx <= screens.size()-1) {
 		screens.at(idx)->Draw(this);
 		idx++;
 	}
-	//update
+
+	// Update the display
 	SDL_RenderPresent( gfx->GetRenderer() );
 }
 
