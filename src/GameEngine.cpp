@@ -44,6 +44,7 @@ void GameEngine::Cleanup()
 		screens.back()->Cleanup();
 		screens.pop_back();
 	}
+	screens.clear();
 	//clean draw engine
 	drawer->Cleanup();
 	delete drawer;
@@ -132,6 +133,7 @@ void GameEngine::Update()
 
 void GameEngine::Draw()
 {
+	//Clear the screen
 	SDL_SetRenderDrawColor( gfx->GetRenderer(), 0x2A, 0x2A, 0x34, 0xFF );
 	SDL_RenderClear( gfx->GetRenderer() );
 
@@ -152,7 +154,7 @@ void GameEngine::Quit()
 	running = false;
 }
 
-bool GameEngine::isRunning()
+bool GameEngine::IsRunning()
 {
 	return running;
 }

@@ -8,7 +8,7 @@ int main( int argc, char* args[] )
 
 	GameEngine game;
 	game.Init();
-	while ( game.isRunning() ) {
+	while ( game.IsRunning() ) {
 		game.Draw();
 		game.HandleEvents();
 		game.Update();

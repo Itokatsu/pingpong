@@ -5,14 +5,15 @@
 #include "GraphicEngine.h"
 #include "TimerSDL.h"
 
-class IGameScreen;
 class DrawEngine;
+class IGameScreen;
 
 class GameEngine
 {
 	public:
-		/*Load SDL etc..*/
+		// Load and Init Graphic Engines
 		int Init();
+		// Destroy Engines and clean screens stacks
 		void Cleanup();
 
 		void ChangeScreen(IGameScreen* screen);
@@ -23,28 +24,35 @@ class GameEngine
 		void Update();
 		void Draw();
 
+		// Exits the program
 		void Quit();
-		bool isRunning();
+		bool IsRunning();
 
+		// Getters
 		GraphicEngine* GetGraphicEngine();
 		DrawEngine* GetDrawEngine();
 
 	private:
-		//stack of Screen
+		// stack of Screens
 		std::vector<IGameScreen*> screens;
+		// Screens to display
+		std::vector<IGameScreen*> screenDisplay;
+		// Screens to update
+		std::vector<IGameScreen*> screenRun;
+
 		bool running;
 		GraphicEngine* gfx;
 		DrawEngine* drawer;
 
-		//Timers and FPS counter
+	// Timers and FPS counter
+		// Count ticks since the beginning
 		TimerSDL runTime;
-		TimerSDL FPSTimer;
+		// Count ticks since last update
 		TimerSDL updateTime;
+		// Count ticks since last FPS display
+		TimerSDL FPSTimer;
+		// # of frames displayed during last second
 		int framesThisSec;
-
 };
-
-#include "DrawEngine.h"
-#include "IGameScreen.h"
 
 #endif
