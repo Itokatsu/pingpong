@@ -10,7 +10,7 @@
 int GameEngine::Init()
 {
 	int returnValue = 0;
-	running = true;
+	running = tsrue;
 	//start intro
 	screens.push_back(Screen_Intro::Instance());
 	//start test

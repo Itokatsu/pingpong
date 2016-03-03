@@ -12,7 +12,7 @@ class Ball : public IMovable
 		Ball();
 		Ball(vec2f pos);
 		~Ball();
-
+		//testing stuff
 		void UpdateCollisionBox();
 		void AcceptCollision(IHasCollision* c, SDL_Rect* cMask);
 		void CollidesWith(Ball* b, SDL_Rect* cMask);

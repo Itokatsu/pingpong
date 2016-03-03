@@ -11,7 +11,7 @@ Ball::Ball(vec2f pos) : IMovable(pos)
 	std::cout << " + Baller (" << radius << ") created @ ";
 	std::cout << pos.x << ',' << pos.y << std::endl;
 }
-
+// testing stuff
 Ball::~Ball()
 {
 	std::cout << " - Baller (" << radius << ") deleted" << std::endl;
