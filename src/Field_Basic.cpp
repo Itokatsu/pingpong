@@ -15,8 +15,8 @@ Field_Basic::Field_Basic()
 	ballInitVelocity = {6, 1.5};
 
 	//players starting attributes
-	playersInitPos.push_back({20, 200});
-	playersInitPos.push_back({600, 200});
+	paddlesInitPos.push_back({20, 200});
+	paddlesInitPos.push_back({600, 200});
 	paddleSize = {20, 100};
 
 	std::cout << " + Field (Basic) created" << std::endl;

@@ -20,7 +20,7 @@ class IField : public IHasCollision
 		int GetHeight();
 
 		//init stuff
-		std::vector<vec2f> GetPlayersInitPos();
+		std::vector<vec2f> GetPaddlesInitPos();
 		vec2f GetPaddleSize();
 		vec2f GetBallInitPos();
 		vec2f GetBallInitVelocity();
@@ -43,7 +43,7 @@ class IField : public IHasCollision
 		int height;
 
 		//init stuff
-		std::vector<vec2f> playersInitPos;
+		std::vector<vec2f> paddlesInitPos;
 		vec2f paddleSize;
 		int ballSize;
 		vec2f ballInitPos;

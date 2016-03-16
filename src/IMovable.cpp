@@ -68,13 +68,14 @@ void IMovable::UpdatePosition(float dT, Match* m)
 
 	vec2f dVelocity = velocity * dT;
 		
-	//last step
-	if ( dVelocity.length() < 1){
+	//escape recursivity
+	if ( dVelocity.length() <= 1){
 		SetPos(position + dVelocity);
 		//check & handle collision here
 		m->ChkCollision(this);
 	}
 	else {
+		//time that passed during the travel of a normalized vect
 		float t_norm = dT / dVelocity.length();
 		SetPos(position + dVelocity.normalize());
 		//check & handle collision here

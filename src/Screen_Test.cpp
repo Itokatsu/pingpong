@@ -21,9 +21,6 @@ void Screen_Test::Init()
 
 	std::cout << "[Test Screen Start]" << std::endl;
 	m->Init(new Field_Basic());
-	for ( auto &p : m->GetPlayers() ) {
-		p->GetPaddle()->SetVelocity({0,-1});
-	}
 
 }
 
@@ -47,16 +44,65 @@ void Screen_Test::HandleEvents(GameEngine* game)
 			if( e.type == SDL_KEYDOWN ) {
 				// ESCAPE is pressed
 				if (e.key.keysym.sym == SDLK_ESCAPE) {
-					game->Quit();
+					game->PopScreen();
 				}
-				else if (e.key.keysym.sym == SDLK_p) 
-				{
+
+				if (e.key.keysym.sym == SDLK_p) {
 					this->Pause();
 					game->PushScreen(Screen_Pause::Instance());
+				}
+
+				if (e.key.keysym.sym == SDLK_UP ) {
+					for (auto &player : m->GetPlayers() ) {
+						Paddle* pad = player->GetPaddle();
+						//vec2f chVelocity = {0.f, -2.f};
+						pad->SetVelocity({pad->GetVelocity().x, -4});
+					}
+				}
+
+				if (e.key.keysym.sym == SDLK_DOWN ) {
+					for (auto &player : m->GetPlayers() ) {
+						Paddle* pad = player->GetPaddle();
+						//vec2f chVelocity = {0.f, 2.f};
+						pad->SetVelocity({pad->GetVelocity().x, 4});
+					}
+				}
+
+			}
+
+			if( e.type == SDL_KEYUP ) {
+				if (e.key.keysym.sym == SDLK_UP ) {
+					for (auto &player : m->GetPlayers() ) {
+						Paddle* pad = player->GetPaddle();
+						pad->SetVelocity({pad->GetVelocity().x, 0});
+					}
+				}
+
+				if (e.key.keysym.sym == SDLK_DOWN ) {
+					for (auto &player : m->GetPlayers() ) {
+						Paddle* pad = player->GetPaddle();
+						pad->SetVelocity({pad->GetVelocity().x, 0});
+					}
 				}
 			}
 		}
 	}
+
+	/*const Uint8* keyStates = SDL_GetKeyboardState(NULL);
+	if( keyStates[SDL_SCANCODE_UP]) {
+		for (auto &player : m->GetPlayers() ) {
+			Paddle* pad = player->GetPaddle();
+			vec2f chVelocity = {0.f, -2.f};
+			pad->SetVelocity(pad->GetVelocity() + chVelocity);
+		}
+	}
+	if( keyStates[SDL_SCANCODE_DOWN]) {
+		for (auto &player : m->GetPlayers() ) {
+			Paddle* pad = player->GetPaddle();
+			vec2f chVelocity = {0.f, 2.f};
+			pad->SetVelocity(pad->GetVelocity() + chVelocity);
+		}
+	}*/
 }
 
 void Screen_Test::Update(GameEngine* game, float dT)

@@ -38,8 +38,8 @@ int GraphicEngine::Init()
 			/*screenSurface = SDL_GetWindowSurface(window);*/
 
 			//creating renderer (texture usage)
-			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-			//renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
+			//renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
 			SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 			if( renderer == NULL ) {
 				std::cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << std::endl;

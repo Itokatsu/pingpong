@@ -9,9 +9,9 @@
 
 void Ball::UpdateCollisionBox() {
 	collisionBox = {position.ToSDLPoint().x-radius,
-					position.ToSDLPoint().y-radius,
-					radius*2,
-					radius*2};
+			position.ToSDLPoint().y-radius,
+			radius*2,
+			radius*2};
 }
 
 void Ball::AcceptCollision(IHasCollision* c, SDL_Rect* cMask)
@@ -28,7 +28,7 @@ void Ball::CollidesWith(IField* f, SDL_Rect* cMask)
 	}
 	//right side collides
 	else if ( collisionBox.x + collisionBox.w >= f->GetWidth()
-											&& velocity.x > 0) {
+			&& velocity.x > 0) {
 		velocity.x = - velocity.x;
 	}
 	//top side collides
@@ -37,7 +37,7 @@ void Ball::CollidesWith(IField* f, SDL_Rect* cMask)
 	}
 	//bottom side collides
 	else if ( collisionBox.y + collisionBox.h >= f->GetHeight()
-											&& velocity.y > 0) {
+			&& velocity.y > 0) {
 		velocity.y = - velocity.y;
 	}
 
@@ -54,8 +54,8 @@ void Ball::CollidesWith(Paddle* p, SDL_Rect* cMask)
 	}
 	//right side collides with left side of paddle
 	else if ( cMask->x + cMask->w == collisionBox.x + collisionBox.w
-				&& cMask->x == pBox->x
-				&& velocity.x > 0) {
+			&& cMask->x == pBox->x
+			&& velocity.x > 0) {
 		velocity.x = - velocity.x;
 	}
 	//top side collides with bottom side of paddle
@@ -78,18 +78,18 @@ void Ball::CollidesWith(Ball* b, SDL_Rect* cMask)
 
 }
 
+//Need better handling when p_Last == NULL
 void Ball::CollidesWith(Goal* g, SDL_Rect* cMask)
 {
 	if (p_Last != NULL) {
 		p_Last->IncrScore();
 		std::cout << p_Last->GetName() << " scored ! (";
 		std::cout << p_Last->GetScore() << ')' << std::endl;
+	}
 
 	//reset ball Position
 	vec2f pos = g->GetField()->GetBallInitPos();
 	this->SetPos( pos );
 	this->SetVelocity({0,0});
 	p_Last = NULL;
-	}
-
 }

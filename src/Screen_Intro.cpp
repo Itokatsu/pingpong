@@ -47,7 +47,7 @@ void Screen_Intro::HandleEvents(GameEngine* game)
 					game->Quit();
 				}
 				else if (e.key.keysym.sym == SDLK_SPACE ) {
-					game->ChangeScreen(Screen_Test::Instance());
+					game->PushScreen(Screen_Test::Instance());
 				}
 			}
 		}
@@ -56,7 +56,6 @@ void Screen_Intro::HandleEvents(GameEngine* game)
 
 void Screen_Intro::Update(GameEngine* game, float dT)
 {
-	SDL_Delay(100);
 }
 
 void Screen_Intro::Draw(GameEngine* game)

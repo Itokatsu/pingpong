@@ -10,9 +10,9 @@ IField::~IField()
 	goals.clear();
 }
 
-std::vector<vec2f> IField::GetPlayersInitPos()
+std::vector<vec2f> IField::GetPaddlesInitPos()
 {
-	return playersInitPos;
+	return paddlesInitPos;
 }
 
 vec2f IField::GetBallInitPos()

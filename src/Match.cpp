@@ -30,12 +30,12 @@ Match::~Match()
 void Match::Init(IField* f)
 {
 	field = f;
+	SDL_Point paddleSize = field->GetPaddleSize().ToSDLPoint();
 	int playerid = 1;
-	for ( auto &pos : field->GetPlayersInitPos() ) {
+	for ( auto &pos : field->GetPaddlesInitPos() ) {
 		//create and push_back
-		Player* p = new Player("Player " + std::to_string(playerid++), pos, field->GetPaddleSize().ToSDLPoint());
-		Paddle* pad = p->GetPaddle();
-		pad->SetVelocity({0,-1});
+		std::string playerName = "Player " + std::to_string(playerid++);
+		Player* p = new Player(playerName, pos, paddleSize);
 		players.push_back(p);
 	}
 
@@ -86,6 +86,7 @@ Ball* Match::GetBall()
 }
 
 //JUST A BABY CHECK
+//@TODO loop through a collection of IHasCollision items
 void Match::ChkCollision(IHasCollision* c)
 {
 	SDL_Rect* cBox = c->GetCollisionBox();

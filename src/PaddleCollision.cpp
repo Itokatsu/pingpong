@@ -25,10 +25,9 @@ void Paddle::CollidesWith(IField* f, SDL_Rect* cMask)
 	}
 	//top side collides
 	else if ( collisionBox.y <= 0 && velocity.y < 0) {
-		/*velocity.y = 0;
-		SetPos( {position.x, 0} );*/
-		//just for demo
-		velocity.y = -velocity.y;
+		// velocity.y = -velocity.y; //demo
+		velocity.y = 0;
+		SetPos( {position.x, 0} );
 	}
 	//right side collides
 	else if ( collisionBox.x + collisionBox.w >= f->GetWidth()
@@ -39,9 +38,9 @@ void Paddle::CollidesWith(IField* f, SDL_Rect* cMask)
 	//bottom side collides
 	else if ( collisionBox.y + collisionBox.h >= f->GetHeight()
 											&& velocity.y > 0) {
-		/*velocity.y = 0;
-		SetPos( {position.x, f->GetHeight() - (float)size.y } );*/
-		velocity.y = -velocity.y;
+		// velocity.y = -velocity.y; //demo
+		velocity.y = 0;
+		SetPos( {position.x, f->GetHeight() - (float)size.y } );
 	}
 }
 
@@ -57,5 +56,5 @@ void Paddle::CollidesWith(Ball* b, SDL_Rect* cMask)
 
 void Paddle::CollidesWith(Goal* g, SDL_Rect* cMask)
 {
-	//nothing to see here
+	//nothing to do here
 }
