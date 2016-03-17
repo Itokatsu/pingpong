@@ -17,6 +17,9 @@ class Screen_Test : public IGameScreen
 		void Update(GameEngine* game, float dT);
 		void Draw(GameEngine* game);
 
+		void Pause();
+		void Unpause();
+
 		//Singleton
 		static Screen_Test* Instance();
 
