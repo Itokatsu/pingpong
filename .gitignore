@@ -7,7 +7,7 @@ bin/*
 
 # Sublime Text Projects
 *.sublime-*
-subl_make.sh
+subl_cmake.sh
 
 # Ignore Mac specific files
 .DS_Store
