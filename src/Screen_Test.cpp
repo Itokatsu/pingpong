@@ -18,6 +18,7 @@ void Screen_Test::Init()
 {
 	m = new Match();
 
+	baseSpd = 4.f;
 	std::cout << "[Test Screen Start]" << std::endl;
 	m->Init(new Field_Basic());
 
@@ -43,13 +44,13 @@ void Screen_Test::Unpause()
 	if( keyStates[SDL_SCANCODE_UP]) {
 		for (auto &player : m->GetPlayers() ) {
 			Paddle* pad = player->GetPaddle();
-			pad->SetVelocity({0.f, -4.f});
+			pad->SetVelocity({0.f, -baseSpd});
 		}
 	}
 	else if( keyStates[SDL_SCANCODE_DOWN]) {
 		for (auto &player : m->GetPlayers() ) {
 			Paddle* pad = player->GetPaddle();
-			pad->SetVelocity({0.f, 4.f});
+			pad->SetVelocity({0.f, baseSpd});
 		}
 	}
 	else {
@@ -71,7 +72,7 @@ void Screen_Test::HandleEvents(GameEngine* game)
 		else {
 
 			// Key press 
-			if( e.type == SDL_KEYDOWN ) {
+			if( e.type == SDL_KEYDOWN && e.key.repeat == 0) {
 
 				if (e.key.keysym.sym == SDLK_ESCAPE) {
 					game->PopScreen();
@@ -84,8 +85,8 @@ void Screen_Test::HandleEvents(GameEngine* game)
 				if (e.key.keysym.sym == SDLK_UP ) {
 					for (auto &player : m->GetPlayers() ) {
 						Paddle* pad = player->GetPaddle();
-						vec2f chVelocity = {0.f, -4.f};
-						//pad->SetVelocity({pad->GetVelocity().x, -4});
+						vec2f chVelocity = {0.f, -baseSpd};
+						// pad->SetVelocity({pad->GetVelocity().x, -4});
 						pad->SetVelocity( pad->GetVelocity() + chVelocity );
 					}
 				} // up arrow key
@@ -93,26 +94,30 @@ void Screen_Test::HandleEvents(GameEngine* game)
 				if (e.key.keysym.sym == SDLK_DOWN ) {
 					for (auto &player : m->GetPlayers() ) {
 						Paddle* pad = player->GetPaddle();
-						vec2f chVelocity = {0.f, 4.f};
-						//pad->SetVelocity({pad->GetVelocity().x, 4});
+						vec2f chVelocity = {0.f, baseSpd};
+						// pad->SetVelocity({pad->GetVelocity().x, 4});
 						pad->SetVelocity( pad->GetVelocity() + chVelocity );
 					}
 				} // down arrow key
 			} // keypress
 
 			// Key Release
-			if( e.type == SDL_KEYUP ) {
+			else if( e.type == SDL_KEYUP ) {
 				if (e.key.keysym.sym == SDLK_UP ) {
 					for (auto &player : m->GetPlayers() ) {
 						Paddle* pad = player->GetPaddle();
-						pad->SetVelocity({pad->GetVelocity().x, 0});
+						vec2f chVelocity = {0.f, -baseSpd};
+						// pad->SetVelocity({pad->GetVelocity().x, 4});
+						pad->SetVelocity( pad->GetVelocity() - chVelocity );
 					}
 				} // up arrow key
 
 				if (e.key.keysym.sym == SDLK_DOWN ) {
 					for (auto &player : m->GetPlayers() ) {
 						Paddle* pad = player->GetPaddle();
-						pad->SetVelocity({pad->GetVelocity().x, 0});
+						vec2f chVelocity = {0.f, baseSpd};
+						// pad->SetVelocity({pad->GetVelocity().x, 4});
+						pad->SetVelocity( pad->GetVelocity() - chVelocity );
 					}
 				} // down arrow key
 			}

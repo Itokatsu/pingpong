@@ -20,26 +20,26 @@ void Paddle::AcceptCollision(IHasCollision* c, SDL_Rect* cMask)
 void Paddle::CollidesWith(IField* f, SDL_Rect* cMask)
 {
 	if (collisionBox.x <= 0 && velocity.x < 0) {
-		velocity.x = 0;
+		// velocity.x = 0;
 		SetPos( {0, position.y} );
 	}
 	//top side collides
 	else if ( collisionBox.y <= 0 && velocity.y < 0) {
 		// velocity.y = -velocity.y; //demo
-		velocity.y = 0;
+		// velocity.y = 0;
 		SetPos( {position.x, 0} );
 	}
 	//right side collides
 	else if ( collisionBox.x + collisionBox.w >= f->GetWidth()
 											&& velocity.x > 0) {
-		velocity.x = 0;
+		// velocity.x = 0;
 		SetPos( {f->GetWidth() - (float)size.x, position.y} );
 	}
 	//bottom side collides
 	else if ( collisionBox.y + collisionBox.h >= f->GetHeight()
 											&& velocity.y > 0) {
 		// velocity.y = -velocity.y; //demo
-		velocity.y = 0;
+		// velocity.y = 0;
 		SetPos( {position.x, f->GetHeight() - (float)size.y } );
 	}
 }

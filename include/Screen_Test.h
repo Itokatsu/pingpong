@@ -31,6 +31,7 @@ class Screen_Test : public IGameScreen
 
 		//Singleton
 		static Screen_Test myTest;
+		float baseSpd;
 
 };
 

@@ -6,4 +6,4 @@ SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 cd $SCRIPTPATH/build/ 
 cmake .. -G "Sublime Text 2 - Unix Makefiles" 
-subl pong.sublime-project
+subl3 pong.sublime-project
