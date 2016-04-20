@@ -10,6 +10,7 @@ Messing around with Game Development.
   - SDL_ttf
   - Cmake (ver > 3.0)
 --
+
 ### Building
 In-Source builds are **strongly discouraged**.
 
