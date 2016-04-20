@@ -13,7 +13,7 @@ class IGameScreen
 {
 	public:
 		//Creation of all the IGameScreen's assets
-		virtual void Init() = 0;
+		virtual void Init(GameEngine* game) = 0;
 		//Deleting assets
 		virtual void Cleanup() = 0;
 

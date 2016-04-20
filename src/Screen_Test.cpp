@@ -14,7 +14,7 @@ Screen_Test::Screen_Test()
 
 }
 
-void Screen_Test::Init()
+void Screen_Test::Init(GameEngine* game)
 {
 	m = new Match();
 
@@ -47,16 +47,10 @@ void Screen_Test::Unpause()
 			pad->SetVelocity({0.f, -baseSpd});
 		}
 	}
-	else if( keyStates[SDL_SCANCODE_DOWN]) {
+	if( keyStates[SDL_SCANCODE_DOWN]) {
 		for (auto &player : m->GetPlayers() ) {
 			Paddle* pad = player->GetPaddle();
 			pad->SetVelocity({0.f, baseSpd});
-		}
-	}
-	else {
-		for (auto &player : m->GetPlayers() ) {
-			Paddle* pad = player->GetPaddle();
-			pad->SetVelocity({0,0});
 		}
 	}
 }

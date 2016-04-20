@@ -6,7 +6,7 @@
 class Screen_Pause : public IGameScreen
 {
 	public:
-		void Init();
+		void Init(GameEngine* game);
 		void Cleanup();
 
 		void Pause();

@@ -6,7 +6,7 @@
 class Screen_Intro : public IGameScreen
 {
 	public:
-		void Init();
+		void Init(GameEngine* game);
 		void Cleanup();
 
 		void Pause();
@@ -23,6 +23,7 @@ class Screen_Intro : public IGameScreen
 
 	private:
 		static Screen_Intro myIntro;
+		SDL_Texture* texture_title;
 
 };
 

@@ -28,13 +28,15 @@ set(EXE_NAME ${PROJECT_NAME})
 
 # FIND SDL2 libraries
 find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
 # Include headers and libraries
-include_directories (${HEADER_DIR} ${SDL2_INCLUDE_DIR})
+include_directories (${HEADER_DIR} ${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR} )
 
 # compile
 add_executable(${EXE_NAME} ${SOURCES_FILES})
-target_link_libraries(${EXE_NAME} ${SDL2_LIBRARY})
+target_link_libraries(${EXE_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
 
 # add make run target
 add_custom_target(run

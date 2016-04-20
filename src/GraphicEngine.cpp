@@ -34,12 +34,12 @@ int GraphicEngine::Init()
 		else {
 			initialized = true;
 			
-			//for surface usage
+			// for surface usage
 			/*screenSurface = SDL_GetWindowSurface(window);*/
 
-			//creating renderer (texture usage)
-			//renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
+			// creating renderer (texture usage)
+			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			// renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
 			SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 			if( renderer == NULL ) {
 				std::cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << std::endl;

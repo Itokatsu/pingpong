@@ -10,7 +10,7 @@
 class Screen_Test : public IGameScreen
 {
 	public:
-		void Init();
+		void Init(GameEngine* game);
 		void Cleanup();
 
 		void HandleEvents(GameEngine* game);

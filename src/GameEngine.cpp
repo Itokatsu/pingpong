@@ -28,7 +28,7 @@ int GameEngine::Init()
 		// start intro
 		screens.push_back(Screen_Intro::Instance());
 		// init intro
-		screens.back()->Init();
+		screens.back()->Init(this);
 
 		//start timers
 		framesThisSec = 0;
@@ -71,7 +71,7 @@ void GameEngine::ChangeScreen(IGameScreen* screen)
 
 	//add new screen
 	screens.push_back(screen);
-	screens.back()->Init();
+	screens.back()->Init(this);
 }
 
 void GameEngine::PushScreen(IGameScreen* screen)
@@ -83,7 +83,7 @@ void GameEngine::PushScreen(IGameScreen* screen)
 
 	//start new top screen
 	screens.push_back(screen);
-	screens.back()->Init();
+	screens.back()->Init(this);
 }
 
 void GameEngine::PopScreen()
@@ -119,7 +119,7 @@ void GameEngine::Update()
 
 	float dTime = diff*60 / 1000.f; // convert to 1/60ths of second
 
-	// Display FPS every second
+	// Outputs FPS every second
 	if (FPSTimer.getTime() >= 1000) { //1sec passed
 		std::cout << "FPS : " << framesThisSec << std::endl;
 		// Reset counter
@@ -166,7 +166,7 @@ void GameEngine::Draw()
 
 void GameEngine::Quit()
 {
-	running = false;
+	running = false; // Will quit the main loop
 }
 
 bool GameEngine::IsRunning()
