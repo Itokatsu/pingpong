@@ -5,7 +5,7 @@ Messing around with Game Development.
 
 
 ### Requirements
-  - cmake
+  - Cmake (ver. >=3.0)
   - SDL2 (https://www.libsdl.org/download-2.0.php)
   - SDL_image 
   - SDL_ttf
